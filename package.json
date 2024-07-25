@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",  
-    "start": "astro dev",  
+    "dev": "astro dev",
+    "start": "astro dev",
     "build": "npm run build:tailwind:prod && astro check && astro build",
     "preview": "astro preview",
     "build:tailwind:prod": "npx tailwindcss -i ./src/styles/global.css -o ./public/styles/global.css",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/check": "^0.8.2",
     "@astrojs/react": "^3.6.0",
+    "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.12.2",
     "autoprefixer": "^10.4.19",
     "framer-motion": "^11.3.17",
