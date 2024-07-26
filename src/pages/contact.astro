@@ -1,10 +1,32 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import ContactSection from "@components/sections/misc/ContactSection.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle: string = `Contact | ${SITE.title}`;
 ---
 
-<Layout title="Contact">
-  <section class="py-16">
-    <h3 class="text-3xl font-bold text-center mb-8">Contact Us</h3>
-    <p class="text-center">Contact information for the company.</p>
-  </section>
-</Layout>
+<!--Utilizing MainLayout for the outer layout of the page, and defining meta for SEO purposes-->
+<MainLayout
+  title={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://sbc.om/contact",
+    "url": "https://sbc.om/contact",
+    "name": "Contact Us | ScrewFast",
+    "description":
+      "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "url": "https://sbc.om",
+      "name": "SBC",
+      "description":
+        "SBC offers top-tier hardware tools and expert construction services to meet all your project needs.",
+    },
+    "inLanguage": "en-US"
+  }}
+>
+  <ContactSection />
+</MainLayout>
