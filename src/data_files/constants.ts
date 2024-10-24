@@ -33,7 +33,7 @@ export const OG = {
   locale: "en_US",
   type: "website",
   url: SITE.url,
-  title: `${SITE.title}: : Hardware Tools & Construction Services`,
-  description: "Equip your projects with Senior Blockchain's top-quality hardware tools and expert construction services. Trusted by industry leaders, Senior Blockchain offers simplicity, affordability, and reliability. Experience the difference with user-centric design and cutting-edge tools. Start exploring now!",
+  title: `${SITE.title}: Advanced Software Solutions & Blockchain Development`,
+  description: "Elevate your business with Senior Blockchain's comprehensive software development services. From decentralized applications to custom Web3/5 solutions, Senior Blockchain delivers tailored, scalable, and secure software designed to meet the needs of modern enterprises. Partner with us for cutting-edge technology and seamless integration.",
   image: ogImageSrc,
 };
