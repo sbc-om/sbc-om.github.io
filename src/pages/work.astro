@@ -1,0 +1,143 @@
+---
+import Heading from "@components/Heading.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+interface Project {
+  name: string;
+  desc: string;
+  link: string | null;
+  ghLink: string | null;
+  tech: string[];
+}
+
+const projects: Project[] = [
+  {
+    name: "DeFi Vault",
+    desc: "A decentralized finance platform enabling secure and transparent lending and borrowing using blockchain technology.",
+    tech: [
+      "Ethereum Smart Contracts",
+      "Solidity",
+      "Web3.js",
+      "React",
+      "TailwindCSS",
+      "Metamask Integration",
+    ],
+    link: "https://defivault.seniorblockchain.io",
+    ghLink: "https://github.com/seniorblockchain/defivault",
+  },
+  {
+    name: "AI-Powered Investment Tracker",
+    desc: "An AI-driven investment management platform that provides real-time analytics and portfolio optimization.",
+    tech: [
+      "Python",
+      "TensorFlow",
+      "Flask",
+      "React",
+      "TailwindCSS",
+      "CoinGecko API",
+    ],
+    link: "https://investmenttracker.seniorblockchain.io",
+    ghLink: "https://github.com/seniorblockchain/investmenttracker",
+  },
+  {
+    name: "Blockchain Voting System",
+    desc: "A secure, tamper-proof blockchain-based voting system ensuring transparency and integrity for elections.",
+    tech: [
+      "Hyperledger Fabric",
+      "Node.js",
+      "React",
+      "Docker",
+      "Kubernetes",
+      "TailwindCSS",
+    ],
+    link: "https://votingsystem.seniorblockchain.io",
+    ghLink: "https://github.com/seniorblockchain/votingsystem",
+  },
+  {
+    name: "AI Legal Advisor",
+    desc: "An AI-powered tool that provides legal document analysis and risk assessment for businesses and individuals.",
+    tech: [
+      "Python",
+      "OpenAI GPT",
+      "FastAPI",
+      "Vue.js",
+      "TailwindCSS",
+      "MongoDB",
+    ],
+    link: "https://ailegaladvisor.seniorblockchain.io",
+    ghLink: "https://github.com/seniorblockchain/ailegaladvisor",
+  },
+  {
+    name: "Supply Chain Tracker",
+    desc: "A blockchain solution for real-time tracking and verification of goods in supply chains, improving transparency.",
+    tech: [
+      "Ethereum",
+      "IPFS",
+      "Solidity",
+      "React",
+      "GraphQL",
+      "Material-UI",
+    ],
+    link: "https://supplychain.seniorblockchain.io",
+    ghLink: "https://github.com/seniorblockchain/supplychain",
+  },
+];
+---
+
+<BaseLayout title="Work">
+  <Heading title="Projects" subtitle="Blockchain & AI Innovations" />
+  <p class="text-center prose-a:link">
+    Explore some of our cutting-edge projects in the blockchain and AI domains. Find more on
+    <a href="https://github.com/seniorblockchain" target="_blank">GitHub</a>.
+  </p>
+  <div
+    class="my-16 flex grid-cols-2 flex-col gap-8 xl:grid max-w-4xl md:mx-auto mx-8"
+  >
+    {
+      projects.map((project) => {
+        return (
+          <div class="bg-base-200 rounded-box flex flex-col justify-between p-8 text-left border-2 border-base-300">
+            <div>
+              <h1 class="font-bold text-3xl">{project.name}</h1>
+              <hr class="my-4 border-t-2 border-base-300" />
+              <p class="font-bold text-xl">Description</p>
+              <p>{project.desc}</p>
+              <hr class="my-4 border-t-2 border-base-300" />
+              <p class="font-bold text-xl">Technologies</p>
+              <ul class="disc-list">
+                {project.tech.map((tech) => {
+                  return <li>{tech}</li>;
+                })}
+              </ul>
+              <hr class="my-4 border-t-2 border-base-300" />
+            </div>
+            <div>
+              <div class="flex gap-2">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  aria-label="Project Link"
+                >
+                  <button class="btn btn-square btn-ghost duration-200 ease-in-out hover:text-primary">
+                    <i class="fa-solid fa-globe text-2xl" />
+                  </button>
+                </a>
+                {project.ghLink != null && (
+                  <a href={project.ghLink} target="_blank" aria-label="GitHub">
+                    <button
+                      class="btn btn-square duration-200 ease-in-out hover:text-purple-500 btn-ghost"
+                      disabled={!project.ghLink === undefined}
+                    >
+                      <i class="fa-brands fa-github text-2xl" />
+                    </button>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</BaseLayout>

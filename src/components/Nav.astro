@@ -1,0 +1,46 @@
+---
+interface Item {
+  title: string;
+  link: string;
+  icon: string;
+}
+
+const links: Item[] = [
+  {
+    title: "Home",
+    link: "/",
+    icon: "fa-solid fa-house",
+  },
+  {
+    title: "Work",
+    link: "/work",
+    icon: "fa-solid fa-suitcase",
+  },
+  {
+    title: "Blog",
+    link: "/blog",
+    icon: "fa-solid fa-book-bookmark",
+  },
+  {
+    title: "Contact",
+    link: "/contact",
+    icon: "fa-solid fa-envelope",
+  },
+];
+---
+
+<ul
+  class="flex md:flex-col p-2 md:-translate-y-1/2 md:left-6 max-md:menu-xs bg-base-200 border-base-300 border-2 rounded-box fixed md:top-1/2 max-md:bottom-6 max-md:left-1/2 max-md:-translate-x-1/2 transform z-10"
+>
+  {
+    links.map(({ title, link, icon }) => {
+      return (
+        <li>
+          <a aria-label={title} href={link} class="btn btn-square">
+            <i class={`${icon} text-xl`} />
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

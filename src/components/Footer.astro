@@ -1,0 +1,103 @@
+---
+interface Link {
+  name: string;
+  link: string;
+}
+
+const usefulLinks: Link[] = [
+  {
+    link: "https://seniorblockchain.io",
+    name: "Website",
+  },
+  {
+    link: "https://seniorblockchain.io/careers",
+    name: "Careers",
+  },
+  {
+    link: "https://seniorblockchain.io/projects",
+    name: "Projects",
+  },
+  {
+    link: "https://seniorblockchain.io/contact",
+    name: "Contact",
+  },
+];
+
+const supportLinks: Link[] = [
+  {
+    link: "https://linkedin.com/company/seniorblockchain",
+    name: "LinkedIn",
+  },
+  {
+    link: "https://twitter.com/seniorblock",
+    name: "Twitter",
+  },
+  {
+    link: "https://instagram.com/seniorblockchain",
+    name: "Instagram",
+  },
+  {
+    link: "mailto:post@sbc.om",
+    name: "Email",
+  },
+];
+
+---
+
+<footer
+  class="mx-auto mb-16 p-8 text-center max-w-xl flex flex-col md:flex-row-reverse gap-4 items-center justify-between"
+>
+  <div class="mt-4 grid grid-cols-2 justify-center text-left">
+    <ul>
+      <li class="text-base-content/80 font-bold">links</li>
+      {
+        usefulLinks.map(({ link, name }) => {
+          return (
+            <li>
+              <a class="font-medium" target="_blank" href={link}>
+                {name}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <ul>
+      <li class="text-base-content/80 font-bold">Support</li>
+      {
+        supportLinks.map(({ name, link }) => {
+          return (
+            <li>
+              <a class="font-medium" target="_blank" href={link}>
+                {name}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+  <div>
+    <h1 class="my-4 font-bold text-lg">© Senior Blockchain Company 2024</h1>
+    <div class="flex justify-center">
+      <a
+        class="btn btn-circle btn-ghost"
+        aria-label="GitHub"
+        href="https://github.com/seniorblockchain"
+        target="_blank"><i class="fa-brands fa-github text-2xl"></i></a
+      >
+      <a
+        class="btn btn-circle btn-ghost"
+        aria-label="X (Twitter)"
+        href="https://twitter.com/seniorblock"
+        target="_blank"><i class="fa-brands fa-x-twitter text-2xl"></i></a
+      >
+      <a
+        class="btn btn-circle btn-ghost"
+        aria-label="Mail"
+        href="mailto:post@sbc.om"
+        ><i class="fa-solid fa-envelope text-2xl"></i></a
+      >
+    </div>
+  </div>
+</footer>

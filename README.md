@@ -1,2 +1,1 @@
-# Senior Blockchain Company (SBC)
-Decentralize Everything
+# sbc.om
