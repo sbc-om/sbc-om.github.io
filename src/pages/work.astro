@@ -1,7 +1,7 @@
 ---
 import Heading from "@components/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import EnhancedPortfolio from "@components/sections/EnhancedPortfolio.astro";
 
 interface Project {
   name: string;
@@ -9,135 +9,243 @@ interface Project {
   link: string | null;
   ghLink: string | null;
   tech: string[];
+  category: 'blockchain' | 'ai' | 'defi' | 'enterprise';
+  featured?: boolean;
+  status: 'live' | 'development' | 'completed';
 }
 
 const projects: Project[] = [
   {
     name: "DeFi Vault",
-    desc: "A decentralized finance platform enabling secure and transparent lending and borrowing using blockchain technology.",
-    tech: [
-      "Ethereum Smart Contracts",
-      "Solidity",
-      "Web3.js",
-      "React",
-      "TailwindCSS",
-      "Metamask Integration",
-    ],
+    desc: "A revolutionary decentralized finance platform enabling secure and transparent lending and borrowing using cutting-edge blockchain technology with advanced yield optimization strategies.",
+    tech: ["Ethereum Smart Contracts", "Solidity", "Web3.js", "React", "TailwindCSS", "Metamask Integration", "Chainlink Oracles"],
     link: "https://defivault.seniorblockchain.io",
     ghLink: "https://github.com/seniorblockchain/defivault",
+    category: "defi",
+    featured: true,
+    status: "live"
   },
   {
     name: "AI-Powered Investment Tracker",
-    desc: "An AI-driven investment management platform that provides real-time analytics and portfolio optimization.",
-    tech: [
-      "Python",
-      "TensorFlow",
-      "Flask",
-      "React",
-      "TailwindCSS",
-      "CoinGecko API",
-    ],
+    desc: "An intelligent investment management platform that provides real-time analytics, portfolio optimization, and predictive market analysis using advanced machine learning algorithms.",
+    tech: ["Python", "TensorFlow", "Flask", "React", "TailwindCSS", "CoinGecko API", "PostgreSQL", "Redis"],
     link: "https://investmenttracker.seniorblockchain.io",
     ghLink: "https://github.com/seniorblockchain/investmenttracker",
+    category: "ai",
+    featured: true,
+    status: "live"
   },
   {
     name: "Blockchain Voting System",
-    desc: "A secure, tamper-proof blockchain-based voting system ensuring transparency and integrity for elections.",
-    tech: [
-      "Hyperledger Fabric",
-      "Node.js",
-      "React",
-      "Docker",
-      "Kubernetes",
-      "TailwindCSS",
-    ],
+    desc: "A secure, tamper-proof blockchain-based voting system ensuring complete transparency and integrity for democratic elections with real-time vote counting and verification.",
+    tech: ["Hyperledger Fabric", "Node.js", "React", "Docker", "Kubernetes", "TailwindCSS", "MongoDB"],
     link: "https://votingsystem.seniorblockchain.io",
     ghLink: "https://github.com/seniorblockchain/votingsystem",
+    category: "blockchain",
+    featured: true,
+    status: "live"
   },
   {
     name: "AI Legal Advisor",
-    desc: "An AI-powered tool that provides legal document analysis and risk assessment for businesses and individuals.",
-    tech: [
-      "Python",
-      "OpenAI GPT",
-      "FastAPI",
-      "Vue.js",
-      "TailwindCSS",
-      "MongoDB",
-    ],
+    desc: "An AI-powered legal assistant that provides intelligent document analysis, contract review, and comprehensive risk assessment for businesses and legal professionals.",
+    tech: ["Python", "OpenAI GPT-4", "FastAPI", "Vue.js", "TailwindCSS", "MongoDB", "Elasticsearch"],
     link: "https://ailegaladvisor.seniorblockchain.io",
     ghLink: "https://github.com/seniorblockchain/ailegaladvisor",
+    category: "ai",
+    status: "live"
   },
   {
     name: "Supply Chain Tracker",
-    desc: "A blockchain solution for real-time tracking and verification of goods in supply chains, improving transparency.",
-    tech: [
-      "Ethereum",
-      "IPFS",
-      "Solidity",
-      "React",
-      "GraphQL",
-      "Material-UI",
-    ],
+    desc: "A comprehensive blockchain solution for real-time tracking and verification of goods in supply chains, improving transparency and reducing fraud across global logistics.",
+    tech: ["Ethereum", "IPFS", "Solidity", "React", "GraphQL", "Material-UI", "Docker"],
     link: "https://supplychain.seniorblockchain.io",
     ghLink: "https://github.com/seniorblockchain/supplychain",
+    category: "enterprise",
+    status: "live"
   },
+  {
+    name: "NFT Marketplace",
+    desc: "A next-generation NFT marketplace with advanced features including fractional ownership, royalty management, and cross-chain compatibility.",
+    tech: ["Ethereum", "Polygon", "IPFS", "React", "Web3.js", "MetaMask", "Pinata"],
+    link: "https://nftmarket.seniorblockchain.io",
+    ghLink: "https://github.com/seniorblockchain/nftmarket",
+    category: "blockchain",
+    status: "development"
+  },
+  {
+    name: "Predictive Analytics Platform",
+    desc: "Advanced AI platform for business intelligence and predictive analytics, helping companies make data-driven decisions with machine learning insights.",
+    tech: ["Python", "Scikit-learn", "Django", "React", "D3.js", "PostgreSQL", "Apache Kafka"],
+    link: null,
+    ghLink: "https://github.com/seniorblockchain/analytics",
+    category: "ai",
+    status: "development"
+  },
+  {
+    name: "Cross-Chain Bridge",
+    desc: "Secure and efficient cross-chain bridge enabling seamless asset transfers between different blockchain networks with minimal fees and maximum security.",
+    tech: ["Solidity", "Rust", "Substrate", "React", "Ethers.js", "Chainlink", "Docker"],
+    link: null,
+    ghLink: "https://github.com/seniorblockchain/bridge",
+    category: "defi",
+    status: "development"
+  }
 ];
+
+const stats = {
+  totalProjects: projects.length,
+  liveProjects: projects.filter(p => p.status === 'live').length,
+  technologies: [...new Set(projects.flatMap(p => p.tech))].length,
+  categories: [...new Set(projects.map(p => p.category))].length
+};
 ---
 
-<BaseLayout title="Work">
-  <Heading title="Projects" subtitle="Blockchain & AI Innovations" />
-  <p class="text-center prose-a:link">
-    Explore some of our cutting-edge projects in the blockchain and AI domains. Find more on
-    <a href="https://github.com/seniorblockchain" target="_blank">GitHub</a>.
-  </p>
-  <div
-    class="my-16 flex grid-cols-2 flex-col gap-8 xl:grid max-w-4xl md:mx-auto mx-8"
-  >
-    {
-      projects.map((project) => {
-        return (
-          <div class="bg-base-200 rounded-box flex flex-col justify-between p-8 text-left border-2 border-base-300">
-            <div>
-              <h1 class="font-bold text-3xl">{project.name}</h1>
-              <hr class="my-4 border-t-2 border-base-300" />
-              <p class="font-bold text-xl">Description</p>
-              <p>{project.desc}</p>
-              <hr class="my-4 border-t-2 border-base-300" />
-              <p class="font-bold text-xl">Technologies</p>
-              <ul class="disc-list">
-                {project.tech.map((tech) => {
-                  return <li>{tech}</li>;
-                })}
-              </ul>
-              <hr class="my-4 border-t-2 border-base-300" />
+<BaseLayout title="Work & Projects">
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-br from-base-100 via-base-200 to-base-300">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <h1 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
+        Our Projects
+      </h1>
+      <p class="text-xl md:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed mb-12">
+        Explore our innovative projects in blockchain and AI that are transforming industries worldwide
+      </p>
+      
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
+          <div class="text-3xl font-black text-primary">{stats.totalProjects}</div>
+          <div class="text-sm font-medium text-base-content/70">Total Projects</div>
+        </div>
+        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
+          <div class="text-3xl font-black text-success">{stats.liveProjects}</div>
+          <div class="text-sm font-medium text-base-content/70">Live Projects</div>
+        </div>
+        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
+          <div class="text-3xl font-black text-secondary">{stats.technologies}</div>
+          <div class="text-sm font-medium text-base-content/70">Technologies</div>
+        </div>
+        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
+          <div class="text-3xl font-black text-accent">{stats.categories}</div>
+          <div class="text-sm font-medium text-base-content/70">Categories</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Portfolio Section -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <!-- All Projects Grid -->
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {projects.map((project) => (
+          <div class="group bg-base-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-base-300 relative overflow-hidden">
+            <!-- Status Badge -->
+            <div class="absolute top-4 right-4">
+              <span class={`px-3 py-1 text-xs font-semibold rounded-full ${
+                project.status === 'live' ? 'bg-success/20 text-success' :
+                project.status === 'development' ? 'bg-warning/20 text-warning' :
+                'bg-info/20 text-info'
+              }`}>
+                {project.status === 'live' ? '🟢 Live' : 
+                 project.status === 'development' ? '🟡 In Development' : 
+                 '✅ Completed'}
+              </span>
             </div>
-            <div>
-              <div class="flex gap-2">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  aria-label="Project Link"
-                >
-                  <button class="btn btn-square btn-ghost duration-200 ease-in-out hover:text-primary">
-                    <i class="fa-solid fa-globe text-2xl" />
-                  </button>
-                </a>
-                {project.ghLink != null && (
-                  <a href={project.ghLink} target="_blank" aria-label="GitHub">
-                    <button
-                      class="btn btn-square duration-200 ease-in-out hover:text-purple-500 btn-ghost"
-                      disabled={!project.ghLink === undefined}
-                    >
-                      <i class="fa-brands fa-github text-2xl" />
-                    </button>
-                  </a>
+
+            <!-- Project Header -->
+            <div class="mb-6">
+              <h3 class="text-2xl font-bold text-primary group-hover:text-secondary transition-colors duration-300 mb-2">
+                {project.name}
+              </h3>
+              <span class="inline-block px-3 py-1 text-xs font-semibold bg-primary/10 text-primary rounded-full capitalize">
+                {project.category}
+              </span>
+            </div>
+
+            <!-- Project Description -->
+            <p class="text-base-content/80 leading-relaxed mb-6 line-clamp-4">
+              {project.desc}
+            </p>
+
+            <!-- Tech Stack -->
+            <div class="mb-6">
+              <h4 class="font-bold text-base-content mb-3">Technologies:</h4>
+              <div class="flex flex-wrap gap-2">
+                {project.tech.slice(0, 4).map((tech) => (
+                  <span class="px-2 py-1 text-xs bg-base-200 text-base-content rounded-lg font-medium">
+                    {tech}
+                  </span>
+                ))}
+                {project.tech.length > 4 && (
+                  <span class="px-2 py-1 text-xs bg-accent/20 text-accent rounded-lg font-medium">
+                    +{project.tech.length - 4} more
+                  </span>
                 )}
               </div>
             </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  class="btn btn-primary btn-sm flex-1 group/btn"
+                >
+                  <i class="fa-solid fa-external-link mr-2 group-hover/btn:translate-x-1 transition-transform duration-300"></i>
+                  Live Demo
+                </a>
+              )}
+              {project.ghLink && (
+                <a
+                  href={project.ghLink}
+                  target="_blank"
+                  class="btn btn-outline btn-sm"
+                >
+                  <i class="fa-brands fa-github text-lg"></i>
+                </a>
+              )}
+            </div>
           </div>
-        );
-      })
-    }
-  </div>
+        ))}
+      </div>
+
+      <!-- CTA Section -->
+      <div class="text-center mt-16 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
+        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+          Have a Project in Mind?
+        </h3>
+        <p class="text-lg text-base-content/80 mb-6 max-w-2xl mx-auto">
+          Let's discuss how we can bring your vision to life with cutting-edge blockchain and AI solutions
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/contact"
+            class="btn btn-primary btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
+          >
+            <span class="mr-2">Start Your Project</span>
+            <i class="fa-solid fa-rocket group-hover:translate-y-[-2px] transition-transform duration-300"></i>
+          </a>
+          <a 
+            href="https://github.com/seniorblockchain"
+            target="_blank"
+            class="btn btn-outline btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
+          >
+            <span class="mr-2">View on GitHub</span>
+            <i class="fa-brands fa-github group-hover:scale-110 transition-transform duration-300"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

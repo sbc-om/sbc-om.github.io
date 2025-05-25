@@ -1,0 +1,63 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page Not Found">
+  <section class="min-h-screen flex items-center justify-center px-8 bg-gradient-to-br from-base-100 to-base-200">
+    <div class="text-center space-y-8 max-w-2xl mx-auto">
+      <!-- 404 Illustration -->
+      <div class="relative">
+        <h1 class="text-9xl md:text-[12rem] font-black text-primary/20 select-none">
+          404
+        </h1>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-32 h-32 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center animate-pulse">
+            <i class="fa-solid fa-search text-4xl text-white"></i>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Error Message -->
+      <div class="space-y-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-base-content">
+          Oops! Page Not Found
+        </h2>
+        <p class="text-lg text-base-content/70 leading-relaxed">
+          The page you're looking for seems to have vanished into the blockchain void. 
+          Don't worry, our decentralized navigation will get you back on track!
+        </p>
+      </div>
+      
+      <!-- Navigation Options -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="/"
+          class="btn btn-primary btn-lg px-8 hover:scale-105 transition-all duration-300"
+        >
+          <i class="fa-solid fa-home mr-2"></i>
+          Back to Home
+        </a>
+        
+        <a
+          href="/work"
+          class="btn btn-outline btn-lg px-8 hover:scale-105 transition-all duration-300"
+        >
+          <i class="fa-solid fa-briefcase mr-2"></i>
+          View Our Work
+        </a>
+      </div>
+      
+      <!-- Search Suggestions -->
+      <div class="pt-8 border-t border-base-300">
+        <p class="text-sm text-base-content/60 mb-4">
+          Looking for something specific? Try these popular pages:
+        </p>        <div class="flex flex-wrap gap-2 justify-center">
+          <a href="/#about" class="badge badge-outline hover:badge-primary transition-colors">About Us</a>
+          <a href="/#services" class="badge badge-outline hover:badge-primary transition-colors">Services</a>
+          <a href="/work" class="badge badge-outline hover:badge-primary transition-colors">Our Work</a>
+          <a href="/contact" class="badge badge-outline hover:badge-primary transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

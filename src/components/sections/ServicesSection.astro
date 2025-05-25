@@ -1,0 +1,190 @@
+---
+interface Service {
+  name: string;
+  description: string;
+  features: string[];
+  icon: string;
+  color: string;
+  gradient: string;
+}
+
+const services: Service[] = [
+  {
+    name: "Blockchain Development",
+    description: "Custom blockchain solutions tailored to your business needs, from smart contracts to full-scale decentralized applications.",
+    features: ["Smart Contract Development", "DApp Creation", "Blockchain Consulting", "Security Audits"],
+    icon: "fa-solid fa-link",
+    color: "text-blue-500",
+    gradient: "from-blue-500 to-cyan-500"
+  },
+  {
+    name: "AI & Machine Learning",
+    description: "Cutting-edge AI solutions that transform your data into actionable insights and automated intelligent systems.",
+    features: ["Predictive Analytics", "Natural Language Processing", "Computer Vision", "AI Consulting"],
+    icon: "fa-solid fa-brain",
+    color: "text-purple-500",
+    gradient: "from-purple-500 to-pink-500"
+  },
+  {
+    name: "DeFi Solutions",
+    description: "Revolutionary decentralized finance platforms that enable secure lending, borrowing, and trading.",
+    features: ["DeFi Protocols", "Yield Farming", "Liquidity Pools", "Token Economics"],
+    icon: "fa-solid fa-coins",
+    color: "text-green-500",
+    gradient: "from-green-500 to-emerald-500"
+  },
+  {
+    name: "Enterprise Integration",
+    description: "Seamless integration of blockchain and AI technologies into your existing enterprise systems.",
+    features: ["System Integration", "Legacy Modernization", "API Development", "Cloud Migration"],
+    icon: "fa-solid fa-building",
+    color: "text-orange-500",
+    gradient: "from-orange-500 to-red-500"
+  },
+  {
+    name: "Security & Auditing",
+    description: "Comprehensive security solutions ensuring your blockchain and AI systems are protected against threats.",
+    features: ["Security Audits", "Penetration Testing", "Compliance Consulting", "Risk Assessment"],
+    icon: "fa-solid fa-shield-halved",
+    color: "text-red-500",
+    gradient: "from-red-500 to-pink-500"
+  },
+  {
+    name: "Consulting & Strategy",
+    description: "Strategic guidance and consulting services to help you navigate the blockchain and AI landscape.",
+    features: ["Technology Roadmap", "Digital Transformation", "Training & Workshops", "Market Analysis"],
+    icon: "fa-solid fa-lightbulb",
+    color: "text-yellow-500",
+    gradient: "from-yellow-500 to-amber-500"
+  }
+];
+---
+
+<section id="services" class="py-20 bg-gradient-to-b from-base-200 to-base-100">
+  <div class="max-w-7xl mx-auto px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
+        Our Services
+      </h2>
+      <p class="text-xl md:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed">
+        Comprehensive blockchain and AI solutions designed to transform your business and drive innovation
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service, index) => (
+        <div 
+          class="service-card group relative bg-base-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-base-300 overflow-hidden"
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          <!-- Background Gradient Overlay -->
+          <div class={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+          
+          <!-- Service Icon -->
+          <div class="relative z-10 mb-6">
+            <div class={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl text-white text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+              <i class={service.icon}></i>
+            </div>
+          </div>
+
+          <!-- Service Content -->
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-300">
+              {service.name}
+            </h3>
+            
+            <p class="text-base-content/80 leading-relaxed mb-6">
+              {service.description}
+            </p>
+
+            <!-- Features List -->
+            <ul class="space-y-3 mb-6">
+              {service.features.map((feature) => (
+                <li class="flex items-center text-sm">
+                  <i class={`fa-solid fa-check-circle ${service.color} mr-3 text-lg group-hover:scale-110 transition-transform duration-300`}></i>
+                  <span class="text-base-content/90">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <!-- Learn More Button -->
+            <button class="btn btn-outline w-full group-hover:btn-primary transition-all duration-300">
+              <span class="mr-2">Learn More</span>
+              <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
+            </button>
+          </div>
+
+          <!-- Decorative Elements -->
+          <div class="absolute top-4 right-4 w-8 h-8 bg-primary/10 rounded-full group-hover:scale-150 group-hover:bg-primary/20 transition-all duration-500"></div>
+          <div class="absolute bottom-4 left-4 w-4 h-4 bg-secondary/10 rounded-full group-hover:scale-150 group-hover:bg-secondary/20 transition-all duration-700"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center mt-16 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
+      <h3 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+        Ready to Transform Your Business?
+      </h3>
+      <p class="text-lg text-base-content/80 mb-6 max-w-2xl mx-auto">
+        Let's discuss how our blockchain and AI solutions can drive your business forward
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/contact"
+          class="btn btn-primary btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
+        >
+          <span class="mr-2">Get Started</span>
+          <i class="fa-solid fa-rocket group-hover:translate-y-[-2px] transition-transform duration-300"></i>
+        </a>
+        <a 
+          href="/work"
+          class="btn btn-outline btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
+        >
+          <span class="mr-2">View Portfolio</span>
+          <i class="fa-solid fa-eye group-hover:scale-110 transition-transform duration-300"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-card {
+    animation: fadeInUp 0.8s ease-out both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 60px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .service-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gradient-from), var(--gradient-to));
+    border-radius: 1.5rem 1.5rem 0 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-card:hover::before {
+    opacity: 1;
+  }
+</style>

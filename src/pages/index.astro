@@ -1,38 +1,21 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import HeroSection from "@components/HeroSection.astro";
 import About from "@components/sections/About.astro";
+import ServicesSection from "@components/sections/ServicesSection.astro";
+import EnhancedPortfolio from "@components/sections/EnhancedPortfolio.astro";
+import TestimonialsAchievements from "@components/sections/TestimonialsAchievements.astro";
 import Bento from "@components/sections/Bento.astro";
 import Timeline from "@components/sections/Timeline.astro";
 import Team from "@components/sections/Team.astro";
 ---
 
 <BaseLayout title="Home">
-  <section class="w-screen h-screen flex justify-center items-center">
-    <div class="flex flex-col gap-4">
-       
-      <h1 class="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight">
-        Senior Blockchain Company
-      </h1>
- 
-      <h3 class="mx-auto font-semibold text-xl md:text-2xl group mt-8">
-        Decentralize  
-        <span
-          class="font-bold text-primary duration-200 ease-in-out group-hover:tracking-widest group-hover:text-[#0098ea]"
-        >
-        everything
-        </span>
-        is our vision
-      </h3>
-      <a
-        href="#about"
-        class="btn btn-primary mx-auto text-white font-bold btn-outline"
-      >
-        Explore
-      </a>
-    </div>
-  </section>
-
+  <HeroSection />
   <About />
+  <ServicesSection />
+  <EnhancedPortfolio />
+  <TestimonialsAchievements />
   <Bento />
   <Timeline />
   <Team />

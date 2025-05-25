@@ -1,0 +1,151 @@
+---
+---
+
+<section class="relative w-screen h-screen flex justify-center items-center overflow-hidden bg-gradient-to-br from-base-100 via-base-200 to-base-300">
+  <!-- Animated Background Pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,theme(colors.primary)_0%,transparent_50%)] animate-pulse"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_75%,theme(colors.secondary)_0%,transparent_50%)] animate-pulse delay-1000"></div>
+  </div>
+  
+  <!-- Floating Elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-20 left-20 w-2 h-2 bg-primary rounded-full animate-bounce delay-300"></div>
+    <div class="absolute top-40 right-32 w-3 h-3 bg-secondary rounded-full animate-bounce delay-700"></div>
+    <div class="absolute bottom-32 left-1/4 w-1 h-1 bg-accent rounded-full animate-bounce delay-1000"></div>
+    <div class="absolute bottom-20 right-20 w-2 h-2 bg-primary rounded-full animate-bounce delay-1300"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col gap-8 text-center px-4 max-w-6xl mx-auto">
+    <!-- Main Title with Gradient -->
+    <div class="space-y-4">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in-up">
+        Senior Blockchain<br/>
+        <span class="text-primary font-extrabold">Company</span>
+      </h1>
+      
+      <!-- Dynamic Typing Effect -->
+      <div class="h-16 md:h-20 flex items-center justify-center">
+        <h2 id="typing-text" class="text-2xl md:text-4xl lg:text-5xl font-bold text-base-content min-h-[1.2em]">
+          <span class="text-primary">Decentralize</span> Everything
+        </h2>
+      </div>
+    </div>
+
+    <!-- Subtitle with Enhanced Animation -->
+    <p class="text-lg md:text-xl lg:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed animate-fade-in-up delay-500">
+      Pioneering the future of <span class="text-primary font-semibold">blockchain technology</span> and 
+      <span class="text-secondary font-semibold">AI innovation</span> to transform industries worldwide
+    </p>
+
+    <!-- Enhanced CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up delay-700">
+      <a
+        href="#about"
+        class="btn btn-primary btn-lg text-white font-bold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
+      >
+        <span class="mr-2">Explore Our Vision</span>
+        <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform duration-300"></i>
+      </a>
+      
+      <a
+        href="/work"
+        class="btn btn-outline btn-lg font-bold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
+      >
+        <span class="mr-2">View Projects</span>
+        <i class="fa-solid fa-external-link group-hover:translate-x-1 transition-transform duration-300"></i>
+      </a>
+    </div>
+
+    <!-- Stats Preview -->
+    <div class="grid grid-cols-3 gap-8 mt-16 animate-fade-in-up delay-1000">
+      <div class="text-center group cursor-pointer hover:scale-105 transition-transform duration-300">
+        <div class="text-3xl md:text-4xl font-black text-primary group-hover:text-secondary transition-colors duration-300">15+</div>
+        <div class="text-sm md:text-base font-medium text-base-content/70">Years Innovation</div>
+      </div>
+      <div class="text-center group cursor-pointer hover:scale-105 transition-transform duration-300">
+        <div class="text-3xl md:text-4xl font-black text-secondary group-hover:text-primary transition-colors duration-300">100+</div>
+        <div class="text-sm md:text-base font-medium text-base-content/70">Projects Delivered</div>
+      </div>
+      <div class="text-center group cursor-pointer hover:scale-105 transition-transform duration-300">
+        <div class="text-3xl md:text-4xl font-black text-accent group-hover:text-primary transition-colors duration-300">50+</div>
+        <div class="text-sm md:text-base font-medium text-base-content/70">Global Partners</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <div class="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
+      <div class="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Enhanced typing effect
+  const texts = [
+    "Decentralize Everything",
+    "Innovate with Blockchain",
+    "Transform Industries",
+    "Build the Future",
+    "Empower Businesses"
+  ];
+  
+  let textIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typingElement = document.getElementById('typing-text');
+    function typeText() {
+    const currentText = texts[textIndex];
+    
+    if (!typingElement) return;
+    
+    if (isDeleting) {
+      typingElement.innerHTML = `<span class="text-primary">${currentText.substring(0, charIndex - 1)}</span><span class="animate-pulse">|</span>`;
+      charIndex--;
+    } else {
+      typingElement.innerHTML = `<span class="text-primary">${currentText.substring(0, charIndex + 1)}</span><span class="animate-pulse">|</span>`;
+      charIndex++;
+    }
+    
+    if (!isDeleting && charIndex === currentText.length) {
+      setTimeout(() => {
+        isDeleting = true;
+      }, 2000);
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      textIndex = (textIndex + 1) % texts.length;
+    }
+    
+    const speed = isDeleting ? 50 : 100;
+    setTimeout(typeText, speed);
+  }
+  
+  // Start typing effect after page load
+  window.addEventListener('load', () => {
+    setTimeout(typeText, 1000);
+  });
+</script>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 60px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out both;
+  }
+
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-500 { animation-delay: 0.5s; }
+  .delay-700 { animation-delay: 0.7s; }
+  .delay-1000 { animation-delay: 1s; }
+</style>

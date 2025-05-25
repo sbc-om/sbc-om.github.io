@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/static";
+import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 
 import svelte from "@astrojs/svelte";

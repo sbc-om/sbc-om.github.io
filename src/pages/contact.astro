@@ -7,59 +7,323 @@ interface Social {
   title: string;
   body: string;
   icon: string;
+  color: string;
+  hoverColor: string;
 }
 
 const socials: Social[] = [
   {
     link: "https://linkedin.com/company/seniorblockchain",
     title: "LinkedIn",
-    body: "Join us for networking and updates.",
+    body: "Connect with us professionally and stay updated with our latest announcements",
     icon: "fa-brands fa-linkedin",
+    color: "text-blue-600",
+    hoverColor: "hover:bg-blue-50"
   },
   {
     link: "https://twitter.com/seniorblock",
     title: "Twitter",
-    body: "Follow us for the latest news and updates",
+    body: "Follow us for real-time updates, industry insights, and behind-the-scenes content",
     icon: "fa-brands fa-x-twitter",
+    color: "text-gray-800",
+    hoverColor: "hover:bg-gray-50"
   },
   {
     link: "https://instagram.com/seniorblockchain",
     title: "Instagram",
-    body: "See behind-the-scenes and stories from our team",
+    body: "Discover our company culture, team stories, and visual journey through innovation",
     icon: "fa-brands fa-instagram",
+    color: "text-pink-600",
+    hoverColor: "hover:bg-pink-50"
   },
+  {
+    link: "https://github.com/seniorblockchain",
+    title: "GitHub",
+    body: "Explore our open-source projects and contribute to the blockchain ecosystem",
+    icon: "fa-brands fa-github",
+    color: "text-gray-700",
+    hoverColor: "hover:bg-gray-50"
+  },
+  {
+    link: "https://t.me/seniorblockchain",
+    title: "Telegram",
+    body: "Join our community for instant updates and direct communication with our team",
+    icon: "fa-brands fa-telegram",
+    color: "text-blue-500",
+    hoverColor: "hover:bg-blue-50"
+  },
+  {
+    link: "mailto:post@sbc.om",
+    title: "Email",
+    body: "Reach out directly for business inquiries, partnerships, or collaboration opportunities",
+    icon: "fa-solid fa-envelope",
+    color: "text-primary",
+    hoverColor: "hover:bg-primary/5"
+  }
 ];
 ---
 
 <BaseLayout title="Contact">
-  <Heading title="Contact" subtitle="Stay Connected with Us" />
-
-  <div class="my-8 max-w-5xl md:mx-auto mx-8">
-    <h2 class="h2 mb-4 font-bold">Find Us on Social Media</h2>
-    <div class="grid grid-rows-3 gap-4 xl:grid-cols-3 xl:grid-rows-1">
-      {
-        socials.map((social) => {
-          return (
-            <a
-              href={social.link}
-              target="_blank"
-              class="bg-base-200 rounded-box flex items-center gap-6 px-6 py-4 border-2 border-base-300 group transition-transform hover:scale-105 duration-300"
-              id="card"
-            >
-              <i class={`${social.icon} text-3xl text-primary group-hover:text-primary/80 transition-colors duration-200`} />
-              <div class="my-auto">
-                <h3 class="text-2xl md:text-3xl font-bold">{social.title}</h3>
-                <p class="hidden md:block font-medium text-gray-500 mt-4">{social.body}</p>
-              </div>
-            </a>
-          );
-        })
-      }
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-br from-base-100 via-base-200 to-base-300">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <h1 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
+        Get In Touch
+      </h1>
+      <p class="text-xl md:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed">
+        Ready to transform your business with cutting-edge blockchain and AI solutions? We'd love to hear from you.
+      </p>
     </div>
-    <p class="text-center font-medium mt-16">
-      Or directly reach out to us via email: <a
-        class="link text-primary hover:underline"
-        href="mailto:post@sbc.om">post@sbc.om</a>
-    </p>
-  </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="py-20 bg-gradient-to-b from-base-100 to-base-200">
+    <div class="max-w-4xl mx-auto px-8">
+      <div class="bg-base-100 rounded-3xl p-8 md:p-12 shadow-2xl border border-base-300">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+            Start Your Project
+          </h2>
+          <p class="text-lg text-base-content/80">
+            Tell us about your vision and let's build something amazing together
+          </p>
+        </div>
+
+        <form class="space-y-6" id="contact-form">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold">Full Name *</span>
+              </label>
+              <input 
+                type="text" 
+                name="name"
+                placeholder="John Doe" 
+                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
+                required 
+              />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold">Email Address *</span>
+              </label>
+              <input 
+                type="email" 
+                name="email"
+                placeholder="john@company.com" 
+                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
+                required 
+              />
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold">Company</span>
+              </label>
+              <input 
+                type="text" 
+                name="company"
+                placeholder="Your Company" 
+                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
+              />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold">Phone Number</span>
+              </label>
+              <input 
+                type="tel" 
+                name="phone"
+                placeholder="+1 (555) 123-4567" 
+                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
+              />
+            </div>
+          </div>
+
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Project Type *</span>
+            </label>
+            <select name="project-type" class="select select-bordered w-full focus:select-primary transition-all duration-300" required>
+              <option disabled selected>Select your project type</option>
+              <option value="blockchain">Blockchain Development</option>
+              <option value="ai">AI Solutions</option>
+              <option value="defi">DeFi Platform</option>
+              <option value="smart-contracts">Smart Contracts</option>
+              <option value="consulting">Consulting Services</option>
+              <option value="cybersecurity">Cybersecurity</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Budget Range</span>
+            </label>
+            <select name="budget" class="select select-bordered w-full focus:select-primary transition-all duration-300">
+              <option disabled selected>Select your budget range</option>
+              <option value="10k-25k">$10,000 - $25,000</option>
+              <option value="25k-50k">$25,000 - $50,000</option>
+              <option value="50k-100k">$50,000 - $100,000</option>
+              <option value="100k+">$100,000+</option>
+              <option value="discuss">Let's discuss</option>
+            </select>
+          </div>
+
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Project Description *</span>
+            </label>
+            <textarea 
+              name="message"
+              class="textarea textarea-bordered h-32 focus:textarea-primary transition-all duration-300" 
+              placeholder="Tell us about your project, goals, and requirements..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="text-center pt-6">
+            <button 
+              type="submit" 
+              class="btn btn-primary btn-lg px-12 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
+            >
+              <span class="mr-2">Send Message</span>
+              <i class="fa-solid fa-paper-plane group-hover:translate-x-1 transition-transform duration-300"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media & Contact Info -->
+  <section class="py-20 bg-gradient-to-b from-base-200 to-base-100">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+          Connect With Us
+        </h2>
+        <p class="text-lg text-base-content/80 max-w-3xl mx-auto">
+          Follow us on social media for the latest updates, insights, and behind-the-scenes content from our team
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {socials.map((social, index) => (
+          <a
+            href={social.link}
+            target="_blank"
+            class={`group bg-base-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-base-300 ${social.hoverColor}`}
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <div class="flex items-start space-x-4">
+              <div class={`text-3xl ${social.color} group-hover:scale-110 transition-transform duration-300`}>
+                <i class={social.icon}></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-xl font-bold text-base-content mb-2 group-hover:text-primary transition-colors duration-300">
+                  {social.title}
+                </h3>
+                <p class="text-sm text-base-content/70 leading-relaxed">
+                  {social.body}
+                </p>
+              </div>
+              <div class="text-base-content/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300">
+                <i class="fa-solid fa-external-link"></i>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Quick Contact Info -->
+      <div class="mt-16 text-center p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
+        <h3 class="text-2xl font-bold text-primary mb-4">
+          Prefer Direct Contact?
+        </h3>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <a 
+            href="mailto:post@sbc.om"
+            class="flex items-center text-lg font-medium text-base-content hover:text-primary transition-colors duration-300 group"
+          >
+            <i class="fa-solid fa-envelope mr-3 text-primary group-hover:scale-110 transition-transform duration-300"></i>
+            post@sbc.om
+          </a>
+          <div class="hidden sm:block w-px h-6 bg-base-content/20"></div>
+          <div class="flex items-center text-lg font-medium text-base-content">
+            <i class="fa-solid fa-clock mr-3 text-secondary"></i>
+            Response within 24 hours
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  // Contact form handling
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        // Basic validation
+        if (!data.name || !data.email || !data.message) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+        
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission (replace with actual endpoint)
+        setTimeout(() => {
+          alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+          form.reset();
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 2000);
+      });
+    }
+    
+    // Add animation to cards on scroll
+    const cards = document.querySelectorAll('.group');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    cards.forEach(card => observer.observe(card));
+  });
+</script>
+
+<style>
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out both;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+</style>
