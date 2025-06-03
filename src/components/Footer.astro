@@ -1,312 +1,48 @@
 ---
-interface Link {
-  name: string;
-  link: string;
-  icon?: string;
-}
-
-const usefulLinks: Link[] = [
-  {
-    link: "/",
-    name: "Home",
-    icon: "fa-solid fa-house"
-  },
-  {
-    link: "/work",
-    name: "Projects",
-    icon: "fa-solid fa-suitcase"
-  },
-  {
-    link: "/contact",
-    name: "Contact",
-    icon: "fa-solid fa-envelope"
-  },
-];
-
-const supportLinks: Link[] = [
-  {
-    link: "https://linkedin.com/company/seniorblockchain",
-    name: "LinkedIn",
-    icon: "fa-brands fa-linkedin"
-  },
-  {
-    link: "https://twitter.com/seniorblock",
-    name: "Twitter",
-    icon: "fa-brands fa-x-twitter"
-  },
-  {
-    link: "https://instagram.com/seniorblockchain",
-    name: "Instagram",
-    icon: "fa-brands fa-instagram"
-  },
-  {
-    link: "https://github.com/seniorblockchain",
-    name: "GitHub",
-    icon: "fa-brands fa-github"
-  },
-];
-
 const services = [
-  "Blockchain Development",
-  "AI Solutions",
-  "Smart Contracts",
-  "DeFi Platforms",
-  "Cybersecurity",
-  "Consulting"
-];
+  "Programming",
+  "Website Design",
+  "Application Design"
+]
 ---
 
-<footer class="bg-gradient-to-b from-base-200 to-base-300 border-t border-base-300">
-  <!-- Main Footer Content -->
-  <div class="max-w-7xl mx-auto px-8 py-16">
-    <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-12">
+<footer class="bg-base-200 border-t border-base-300">
+  <div class="max-w-7xl mx-auto px-8 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
       
       <!-- Company Info -->
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-bold text-primary mb-4">
-            Senior Blockchain Company
-          </h3>
-          <p class="text-base-content/80 leading-relaxed">
-            Pioneering the future of blockchain and AI technology. 
-            Transforming businesses through innovation, security, and scalability.
-          </p>
-        </div>
-        
-        <!-- Company Stats -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="text-center p-4 bg-base-100 rounded-xl border border-base-300">
-            <div class="text-2xl font-bold text-primary">100+</div>
-            <div class="text-sm text-base-content/70">Projects</div>
-          </div>
-          <div class="text-center p-4 bg-base-100 rounded-xl border border-base-300">
-            <div class="text-2xl font-bold text-secondary">15+</div>
-            <div class="text-sm text-base-content/70">Years</div>
-          </div>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="space-y-3">
-          <a 
-            href="mailto:post@sbc.om"
-            class="flex items-center text-base-content/80 hover:text-primary transition-colors duration-300 group"
-          >
-            <i class="fa-solid fa-envelope mr-3 text-primary group-hover:scale-110 transition-transform duration-300"></i>
-            post@sbc.om
-          </a>
-          <div class="flex items-center text-base-content/80">
-            <i class="fa-solid fa-clock mr-3 text-secondary"></i>
-            24/7 Support Available
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Links -->
-      <div>
-        <h4 class="text-lg font-bold text-primary mb-6">Quick Links</h4>
-        <ul class="space-y-3">
-          {usefulLinks.map(({ link, name, icon }) => (
-            <li>
-              <a 
-                href={link} 
-                class="flex items-center text-base-content/80 hover:text-primary transition-all duration-300 group"
-              >
-                {icon && <i class={`${icon} mr-3 text-sm group-hover:translate-x-1 transition-transform duration-300`}></i>}
-                {name}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <div class="text-center md:text-left">
+        <h3 class="text-lg font-bold text-primary mb-2">
+          Senior Blockchain Company
+        </h3>
+        <p class="text-base-content/70 text-sm mb-2">
+          Professional software development
+        </p>
+        <a 
+          href="mailto:post@sbc.om"
+          class="text-base-content/60 text-sm hover:text-primary transition-colors"
+        >
+          post@sbc.om
+        </a>
       </div>
 
       <!-- Services -->
-      <div>
-        <h4 class="text-lg font-bold text-primary mb-6">Our Services</h4>
-        <ul class="space-y-3">
+      <div class="text-center">
+        <div class="flex gap-6 text-sm text-base-content/70">
           {services.map((service) => (
-            <li class="flex items-center text-base-content/80 hover:text-primary transition-colors duration-300 group cursor-pointer">
-              <i class="fa-solid fa-chevron-right mr-3 text-xs text-secondary group-hover:translate-x-1 transition-transform duration-300"></i>
+            <span class="hover:text-primary transition-colors cursor-default">
               {service}
-            </li>
+            </span>
           ))}
-        </ul>
+        </div>
       </div>
 
-      <!-- Newsletter & Social -->
-      <div>
-        <h4 class="text-lg font-bold text-primary mb-6">Stay Connected</h4>
-        
-        <!-- Newsletter Signup -->
-        <div class="mb-8">
-          <p class="text-base-content/80 text-sm mb-4">
-            Subscribe to our newsletter for the latest updates and insights
-          </p>
-          <div class="flex flex-col space-y-3">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              class="input input-bordered input-sm focus:input-primary transition-all duration-300"
-              id="newsletter-email"
-            />
-            <button 
-              class="btn btn-primary btn-sm hover:scale-105 transition-all duration-300"
-              id="newsletter-submit"
-            >
-              <i class="fa-solid fa-paper-plane mr-2"></i>
-              Subscribe
-            </button>
-          </div>
-        </div>
-
-        <!-- Social Links -->
-        <div>
-          <h5 class="font-semibold text-base-content mb-4">Follow Us</h5>
-          <div class="flex flex-wrap gap-3">
-            {supportLinks.map(({ name, link, icon }) => (
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-circle btn-outline btn-sm hover:btn-primary hover:scale-110 transition-all duration-300 group"
-                aria-label={name}
-              >
-                <i class={`${icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
-              </a>
-            ))}
-          </div>
-        </div>
+      <!-- Copyright -->
+      <div class="text-center md:text-right">
+        <p class="text-base-content/60 text-sm">
+          © 2024 SBC
+        </p>
       </div>
     </div>
   </div>
-
-  <!-- Bottom Bar -->
-  <div class="border-t border-base-300 bg-base-300/50">
-    <div class="max-w-7xl mx-auto px-8 py-6">
-      <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-        
-        <!-- Copyright -->
-        <div class="text-center md:text-left">
-          <p class="text-base-content/70 text-sm">
-            © 2024 Senior Blockchain Company. All rights reserved.
-          </p>
-          <p class="text-base-content/60 text-xs mt-1">
-            Built with ❤️ using Astro, React, and TailwindCSS
-          </p>
-        </div>
-
-        <!-- Legal Links -->
-        <div class="flex items-center space-x-6 text-sm">
-          <a href="#" class="text-base-content/70 hover:text-primary transition-colors duration-300">
-            Privacy Policy
-          </a>
-          <a href="#" class="text-base-content/70 hover:text-primary transition-colors duration-300">
-            Terms of Service
-          </a>
-          <a href="#" class="text-base-content/70 hover:text-primary transition-colors duration-300">
-            Cookie Policy
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Floating Elements -->
-  <div class="absolute top-8 left-8 w-4 h-4 bg-primary/20 rounded-full animate-bounce opacity-50"></div>
-  <div class="absolute top-16 right-16 w-6 h-6 bg-secondary/20 rounded-full animate-bounce delay-500 opacity-50"></div>
-  <div class="absolute bottom-8 left-1/2 w-5 h-5 bg-accent/20 rounded-full animate-bounce delay-1000 opacity-50"></div>
 </footer>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Newsletter subscription
-    const newsletterSubmit = document.getElementById('newsletter-submit') as HTMLButtonElement;
-    const newsletterEmail = document.getElementById('newsletter-email') as HTMLInputElement;
-    
-    if (newsletterSubmit && newsletterEmail) {
-      newsletterSubmit.addEventListener('click', function() {
-        const email = newsletterEmail.value.trim();
-        if (email) {
-          // Show loading state
-          this.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Subscribing...';
-          this.disabled = true;
-          
-          // Simulate subscription (replace with actual API call)
-          setTimeout(() => {
-            alert('Thank you for subscribing! You\'ll receive our latest updates.');
-            newsletterEmail.value = '';
-            this.innerHTML = '<i class="fa-solid fa-paper-plane mr-2"></i>Subscribe';
-            this.disabled = false;
-          }, 1500);
-        } else {
-          alert('Please enter a valid email address.');
-        }
-      });
-      
-      // Enter key support
-      newsletterEmail.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          newsletterSubmit.click();
-        }
-      });
-    }
-    
-    // Footer back to top
-    const footerBackToTop = document.getElementById('footer-back-to-top');
-    if (footerBackToTop) {
-      footerBackToTop.addEventListener('click', function() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    }
-      // Add hover effects to service items
-    const serviceItems = document.querySelectorAll('footer ul li') as NodeListOf<HTMLElement>;
-    serviceItems.forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        item.style.transform = 'translateX(4px)';
-      });
-      
-      item.addEventListener('mouseleave', function() {
-        item.style.transform = 'translateX(0)';
-      });
-    });
-    
-    // Intersection Observer for footer animation
-    const footer = document.querySelector('footer');
-    if (footer) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            footer.classList.add('animate-fade-in-up');
-          }
-        });
-      }, { threshold: 0.1 });
-      
-      observer.observe(footer);
-    }
-  });
-</script>
-
-<style>
-  footer {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .animate-fade-in-up {
-    animation: fadeInUp 1s ease-out both;
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 40px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-</style>

@@ -6,77 +6,85 @@ interface Service {
   icon: string;
   color: string;
   gradient: string;
+  benefits: string[];
 }
 
 const services: Service[] = [
   {
-    name: "Blockchain Development",
-    description: "Custom blockchain solutions tailored to your business needs, from smart contracts to full-scale decentralized applications.",
-    features: ["Smart Contract Development", "DApp Creation", "Blockchain Consulting", "Security Audits"],
-    icon: "fa-solid fa-link",
+    name: "Programming",
+    description: "Advanced software development focused on blockchain and AI, creating innovative solutions for modern businesses with cutting-edge technologies.",
+    features: ["Full-Stack Development", "Backend Systems", "API Integration", "Database Design"],
+    benefits: ["Enhanced Performance", "Scalable Solutions", "Code Quality", "Technical Excellence"],
+    icon: "fa-solid fa-code",
     color: "text-blue-500",
-    gradient: "from-blue-500 to-cyan-500"
+    gradient: "from-blue-600 to-cyan-500"
   },
   {
-    name: "AI & Machine Learning",
-    description: "Cutting-edge AI solutions that transform your data into actionable insights and automated intelligent systems.",
-    features: ["Predictive Analytics", "Natural Language Processing", "Computer Vision", "AI Consulting"],
-    icon: "fa-solid fa-brain",
-    color: "text-purple-500",
-    gradient: "from-purple-500 to-pink-500"
-  },
-  {
-    name: "DeFi Solutions",
-    description: "Revolutionary decentralized finance platforms that enable secure lending, borrowing, and trading.",
-    features: ["DeFi Protocols", "Yield Farming", "Liquidity Pools", "Token Economics"],
-    icon: "fa-solid fa-coins",
+    name: "Website Design",
+    description: "Creating modern and responsive websites with optimal user experience, beautiful design and high performance for powerful digital presence.",
+    features: ["Responsive Design", "Speed Optimization", "Advanced SEO", "Modern UI/UX"],
+    benefits: ["Increased User Engagement", "Improved Rankings", "Better Mobile Experience", "Brand Strengthening"],
+    icon: "fa-solid fa-globe",
     color: "text-green-500",
-    gradient: "from-green-500 to-emerald-500"
+    gradient: "from-green-600 to-emerald-500"
   },
   {
-    name: "Enterprise Integration",
-    description: "Seamless integration of blockchain and AI technologies into your existing enterprise systems.",
-    features: ["System Integration", "Legacy Modernization", "API Development", "Cloud Migration"],
-    icon: "fa-solid fa-building",
+    name: "Mobile Applications",
+    description: "Developing high-quality mobile applications with visual user interface and smooth user experience for Android and iOS platforms.",
+    features: ["Cross-Platform Development", "Native Performance", "Beautiful UI", "Backend Integration"],
+    benefits: ["Wider Accessibility", "Consistent Experience", "Faster Time-to-Market", "Cost-Effective Solution"],
+    icon: "fa-solid fa-mobile-screen",
     color: "text-orange-500",
-    gradient: "from-orange-500 to-red-500"
+    gradient: "from-orange-600 to-red-500"
   },
   {
-    name: "Security & Auditing",
-    description: "Comprehensive security solutions ensuring your blockchain and AI systems are protected against threats.",
-    features: ["Security Audits", "Penetration Testing", "Compliance Consulting", "Risk Assessment"],
-    icon: "fa-solid fa-shield-halved",
-    color: "text-red-500",
-    gradient: "from-red-500 to-pink-500"
-  },
-  {
-    name: "Consulting & Strategy",
-    description: "Strategic guidance and consulting services to help you navigate the blockchain and AI landscape.",
-    features: ["Technology Roadmap", "Digital Transformation", "Training & Workshops", "Market Analysis"],
+    name: "Software Consulting",
+    description: "Providing specialized consulting to businesses for digitalization, process optimization and smart development with blockchain and AI technologies.",
+    features: ["Digital Strategy", "System Analysis", "Process Optimization", "Technology Implementation"],
+    benefits: ["Reduced Manual Work", "Increased Efficiency", "Smart Development", "Future-Ready Solutions"],
     icon: "fa-solid fa-lightbulb",
-    color: "text-yellow-500",
-    gradient: "from-yellow-500 to-amber-500"
+    color: "text-purple-500",
+    gradient: "from-purple-600 to-indigo-500"
+  },
+  {
+    name: "Blockchain Development",
+    description: "Building secure and decentralized blockchain solutions, smart contracts, and DeFi applications with advanced cryptographic technologies.",
+    features: ["Smart Contracts", "DeFi Protocols", "NFT Platforms", "Decentralized Apps"],
+    benefits: ["Enhanced Security", "Transparency", "Decentralization", "Trust & Immutability"],
+    icon: "fa-solid fa-link",
+    color: "text-cyan-500",
+    gradient: "from-cyan-600 to-blue-500"
+  },
+  {
+    name: "Artificial Intelligence",
+    description: "Developing intelligent AI systems, machine learning models, and data analytics solutions to automate processes and enhance decision-making.",
+    features: ["Machine Learning", "Natural Language Processing", "Computer Vision", "Predictive Analytics"],
+    benefits: ["Process Automation", "Data-Driven Insights", "Improved Accuracy", "Competitive Advantage"],
+    icon: "fa-solid fa-brain",
+    color: "text-pink-500",
+    gradient: "from-pink-600 to-rose-500"
   }
 ];
 ---
 
-<section id="services" class="py-20 bg-gradient-to-b from-base-200 to-base-100">
-  <div class="max-w-7xl mx-auto px-8">
-    <!-- Section Header -->
+<section id="services" class="py-20 bg-gradient-to-b from-base-200 to-base-100">  <div class="max-w-7xl mx-auto px-8">    <!-- Section Header -->
     <div class="text-center mb-16">
       <h2 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
         Our Services
       </h2>
-      <p class="text-xl md:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed">
-        Comprehensive blockchain and AI solutions designed to transform your business and drive innovation
-      </p>
-    </div>
-
-    <!-- Services Grid -->
+      <div class="max-w-5xl mx-auto space-y-6">
+        <p class="text-xl md:text-2xl text-base-content/90 leading-relaxed font-medium">
+          Six core pillars of Senior Blockchain Company with expertise in blockchain and AI
+        </p>
+        <p class="text-lg md:text-xl text-base-content/80 leading-relaxed">
+          Delivering innovative solutions and advanced technologies for modern businesses
+        </p>
+      </div>
+    </div>    <!-- Services Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {services.map((service, index) => (
         <div 
-          class="service-card group relative bg-base-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-base-300 overflow-hidden"
+          class="service-card group relative bg-base-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-base-300 overflow-hidden h-full flex flex-col"
           style={`animation-delay: ${index * 0.1}s`}
         >
           <!-- Background Gradient Overlay -->
@@ -90,30 +98,40 @@ const services: Service[] = [
           </div>
 
           <!-- Service Content -->
-          <div class="relative z-10">
+          <div class="relative z-10 flex-1 flex flex-col">
             <h3 class="text-2xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-300">
               {service.name}
             </h3>
             
-            <p class="text-base-content/80 leading-relaxed mb-6">
+            <p class="text-base-content/80 leading-relaxed mb-6 text-sm flex-shrink-0">
               {service.description}
             </p>
 
-            <!-- Features List -->
-            <ul class="space-y-3 mb-6">
-              {service.features.map((feature) => (
-                <li class="flex items-center text-sm">
-                  <i class={`fa-solid fa-check-circle ${service.color} mr-3 text-lg group-hover:scale-110 transition-transform duration-300`}></i>
-                  <span class="text-base-content/90">{feature}</span>
-                </li>
-              ))}
-            </ul>
+            <!-- Technical Features -->
+            <div class="mb-6">
+              <h4 class="text-sm font-semibold text-base-content/90 mb-3 uppercase tracking-wide">Technical Capabilities</h4>
+              <ul class="space-y-2">
+                {service.features.map((feature) => (
+                  <li class="flex items-center text-sm">
+                    <i class={`fa-solid fa-check-circle ${service.color} mr-3 text-sm group-hover:scale-110 transition-transform duration-300`}></i>
+                    <span class="text-base-content/80">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <!-- Learn More Button -->
-            <button class="btn btn-outline w-full group-hover:btn-primary transition-all duration-300">
-              <span class="mr-2">Learn More</span>
-              <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
-            </button>
+            <!-- Business Benefits -->
+            <div class="mb-6 flex-1">
+              <h4 class="text-sm font-semibold text-base-content/90 mb-3 uppercase tracking-wide">Business Benefits</h4>
+              <ul class="space-y-2">
+                {service.benefits.map((benefit) => (
+                  <li class="flex items-center text-sm">
+                    <i class={`fa-solid fa-star ${service.color} mr-3 text-sm group-hover:scale-110 transition-transform duration-300`}></i>
+                    <span class="text-base-content/80">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <!-- Decorative Elements -->
@@ -121,29 +139,28 @@ const services: Service[] = [
           <div class="absolute bottom-4 left-4 w-4 h-4 bg-secondary/10 rounded-full group-hover:scale-150 group-hover:bg-secondary/20 transition-all duration-700"></div>
         </div>
       ))}
-    </div>
-
-    <!-- CTA Section -->
-    <div class="text-center mt-16 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
+    </div><!-- CTA Section -->
+    <div class="text-center mt-16 p-10 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
       <h3 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-        Ready to Transform Your Business?
+        Building the Future of Digital Infrastructure
       </h3>
-      <p class="text-lg text-base-content/80 mb-6 max-w-2xl mx-auto">
-        Let's discuss how our blockchain and AI solutions can drive your business forward
+      <p class="text-lg text-base-content/80 mb-6 max-w-3xl mx-auto leading-relaxed">
+        At Senior Blockchain, we don't just build software—we build the future of digital infrastructure. 
+        Ready to transform your organization with cutting-edge technology solutions?
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
           href="/contact"
           class="btn btn-primary btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
         >
-          <span class="mr-2">Get Started</span>
+          <span class="mr-2">Start Your Digital Transformation</span>
           <i class="fa-solid fa-rocket group-hover:translate-y-[-2px] transition-transform duration-300"></i>
         </a>
         <a 
           href="/work"
           class="btn btn-outline btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
         >
-          <span class="mr-2">View Portfolio</span>
+          <span class="mr-2">Explore Our Projects</span>
           <i class="fa-solid fa-eye group-hover:scale-110 transition-transform duration-300"></i>
         </a>
       </div>
