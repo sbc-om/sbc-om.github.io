@@ -30,25 +30,15 @@ const links: Item[] = [
 
 <!-- Desktop Navigation -->
 <nav class="fixed md:left-6 md:top-1/2 md:-translate-y-1/2 max-md:bottom-6 max-md:left-1/2 max-md:-translate-x-1/2 z-50">
-  <ul class="flex md:flex-col p-3 bg-base-200/90 backdrop-blur-md border-2 border-base-300/50 rounded-2xl shadow-xl max-md:menu-xs">
+  <ul class="flex md:flex-col md:gap-2 max-md:gap-2 p-2 bg-base-100 border border-base-300 rounded-lg">
     {links.map(({ title, link, icon, color }) => (
-      <li class="group">
+      <li>
         <a 
           aria-label={title} 
           href={link} 
-          class={`btn btn-square btn-ghost relative overflow-hidden transition-all duration-300 ${color} hover:scale-110 hover:shadow-lg`}
+          class="w-10 h-10 flex items-center justify-center rounded-md bg-base-100 hover:bg-base-200 transition-colors duration-200"
         >
-          <!-- Icon -->
-          <i class={`${icon} text-lg transition-transform duration-300 group-hover:scale-110`}></i>
-          
-          <!-- Tooltip -->
-          <div class="absolute left-full ml-3 px-3 py-1 bg-base-100 text-base-content text-sm font-medium rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap max-md:hidden">
-            {title}
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-0 h-0 border-t-4 border-b-4 border-r-4 border-transparent border-r-base-100"></div>
-          </div>
-          
-          <!-- Active indicator -->
-          <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+          <i class={`${icon} text-lg`}></i>
         </a>
       </li>
     ))}  </ul>
@@ -187,8 +177,7 @@ const links: Item[] = [
             if (backToTopBtn) {
               backToTopBtn.style.transform = 'scale(1)';
             }
-          }, 150);
-        }
+          }, 150);        }
       });
     }
     
@@ -198,29 +187,14 @@ const links: Item[] = [
     
     navLinks.forEach(link => {
       const href = link.getAttribute('href');
+      
       if (href === currentPath || 
           (currentPath === '/' && href === '/') ||
           (currentPath.startsWith('/work') && href === '/work') ||
           (currentPath.startsWith('/contact') && href === '/contact')) {
-        link.classList.add('btn-primary');
-        link.classList.remove('btn-ghost');
+        link.classList.add('bg-primary', 'text-primary-content');
+        link.classList.remove('bg-base-100', 'hover:bg-base-200');
       }
-    });
-    
-    // Enhanced hover effects for navigation
-    navLinks.forEach(link => {
-      link.addEventListener('mouseenter', function() {
-        if (!this.classList.contains('btn-primary')) {
-          this.style.transform = 'scale(1.1)';
-          this.style.transition = 'transform 0.3s ease';
-        }
-      });
-      
-      link.addEventListener('mouseleave', function() {
-        if (!this.classList.contains('btn-primary')) {
-          this.style.transform = 'scale(1)';
-        }
-      });
     });
     
     // Add keyboard navigation support
