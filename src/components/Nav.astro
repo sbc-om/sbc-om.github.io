@@ -51,37 +51,8 @@ const links: Item[] = [
           <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
         </a>
       </li>
-    ))}
-  </ul>
-  
-  <!-- Theme Toggle Button -->
-  <div class="mt-4 max-md:hidden">
-    <button 
-      id="theme-toggle"
-      class="btn btn-square btn-ghost bg-base-200/90 backdrop-blur-md border-2 border-base-300/50 hover:scale-110 hover:shadow-lg transition-all duration-300 group"
-      aria-label="Toggle theme"
-    >
-      <i class="fa-solid fa-palette text-lg transition-transform duration-300 group-hover:scale-110 group-hover:text-primary"></i>
-      
-      <!-- Theme tooltip -->
-      <div class="absolute left-full ml-3 px-3 py-1 bg-base-100 text-base-content text-sm font-medium rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
-        Switch Theme
-        <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-0 h-0 border-t-4 border-b-4 border-r-4 border-transparent border-r-base-100"></div>
-      </div>
-    </button>
-  </div>
+    ))}  </ul>
 </nav>
-
-<!-- Mobile Theme Toggle -->
-<div class="fixed top-6 right-6 md:hidden z-50">
-  <button 
-    id="mobile-theme-toggle"
-    class="btn btn-circle btn-primary shadow-lg hover:scale-110 transition-all duration-300"
-    aria-label="Toggle theme"
-  >
-    <i class="fa-solid fa-palette text-lg"></i>
-  </button>
-</div>
 
 <!-- Back to Top Button -->
 <button 
@@ -96,17 +67,39 @@ const links: Item[] = [
   // Enhanced navigation functionality
   document.addEventListener('DOMContentLoaded', function() {
     // Theme switching functionality
-    const themes = ['abyss', 'light', 'dark', 'cupcake', 'forest', 'synthwave', 'cyberpunk'];
+    const themes = ['light', 'dark', 'cupcake', 'forest', 'synthwave', 'cyberpunk', 'abyss'];
     let currentThemeIndex = 0;
+    
+    // Initialize theme from localStorage or default
+    const savedTheme = localStorage.getItem('sbc-theme');
+    if (savedTheme && themes.includes(savedTheme)) {
+      currentThemeIndex = themes.indexOf(savedTheme);
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+      // Set default theme
+      document.documentElement.setAttribute('data-theme', themes[0]);
+      localStorage.setItem('sbc-theme', themes[0]);
+    }
     
     function switchTheme() {
       currentThemeIndex = (currentThemeIndex + 1) % themes.length;
       const newTheme = themes[currentThemeIndex];
       document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+      localStorage.setItem('sbc-theme', newTheme);
       
       // Show theme notification
       showThemeNotification(newTheme);
+      
+      // Add visual feedback to button
+      const buttons = [document.getElementById('theme-toggle'), document.getElementById('mobile-theme-toggle')];
+      buttons.forEach(button => {
+        if (button) {
+          button.style.transform = 'scale(0.9)';
+          setTimeout(() => {
+            button.style.transform = 'scale(1)';
+          }, 150);
+        }
+      });
     }
     
     function showThemeNotification(theme: string) {
@@ -116,8 +109,13 @@ const links: Item[] = [
       
       // Create new notification
       const notification = document.createElement('div');
-      notification.className = 'theme-notification fixed top-6 left-1/2 -translate-x-1/2 bg-base-100 text-base-content px-4 py-2 rounded-lg shadow-lg z-50 transform -translate-y-full opacity-0 transition-all duration-300';
-      notification.innerHTML = `<i class="fa-solid fa-palette mr-2"></i>Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`;
+      notification.className = 'theme-notification fixed top-6 left-1/2 -translate-x-1/2 bg-base-100 text-base-content px-6 py-3 rounded-2xl shadow-xl z-[60] transform -translate-y-full opacity-0 transition-all duration-300 border border-base-300';
+      notification.innerHTML = `
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-palette text-primary"></i>
+          <span class="font-semibold">Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)}</span>
+        </div>
+      `;
       document.body.appendChild(notification);
       
       // Animate in
@@ -130,18 +128,12 @@ const links: Item[] = [
       setTimeout(() => {
         notification.style.transform = 'translateX(-50%) translateY(-100%)';
         notification.style.opacity = '0';
-        setTimeout(() => notification.remove(), 300);
-      }, 2000);
-    }
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      const themeIndex = themes.indexOf(savedTheme);
-      if (themeIndex !== -1) {
-        currentThemeIndex = themeIndex;
-        document.documentElement.setAttribute('data-theme', savedTheme);
-      }
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 300);
+      }, 2500);
     }
     
     // Theme toggle button handlers
@@ -149,45 +141,67 @@ const links: Item[] = [
     const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     
     if (themeToggle) {
-      themeToggle.addEventListener('click', switchTheme);
+      themeToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTheme();
+      });
     }
     
     if (mobileThemeToggle) {
-      mobileThemeToggle.addEventListener('click', switchTheme);
+      mobileThemeToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTheme();
+      });
     }
-    
-    // Back to top functionality
+      // Back to top functionality
     const backToTopBtn = document.getElementById('back-to-top');
     
     if (backToTopBtn) {
       // Show/hide back to top button based on scroll position
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+      function handleScroll() {
+        if (backToTopBtn && window.scrollY > 300) {
           backToTopBtn.style.opacity = '1';
           backToTopBtn.style.pointerEvents = 'auto';
-        } else {
+          backToTopBtn.style.transform = 'scale(1)';
+        } else if (backToTopBtn) {
           backToTopBtn.style.opacity = '0';
           backToTopBtn.style.pointerEvents = 'none';
+          backToTopBtn.style.transform = 'scale(0.8)';
         }
-      });
+      }
+      
+      window.addEventListener('scroll', handleScroll);
       
       // Scroll to top when clicked
-      backToTopBtn.addEventListener('click', () => {
+      backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
         });
+        
+        // Add click animation
+        if (backToTopBtn) {
+          backToTopBtn.style.transform = 'scale(0.9)';
+          setTimeout(() => {
+            if (backToTopBtn) {
+              backToTopBtn.style.transform = 'scale(1)';
+            }
+          }, 150);
+        }
       });
     }
     
     // Active page indicator
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('nav a') as NodeListOf<HTMLAnchorElement>;
-      navLinks.forEach(link => {
-      if (link.getAttribute('href') === currentPath || 
-          (currentPath === '/' && link.getAttribute('href') === '/') ||
-          (currentPath.startsWith('/work') && link.getAttribute('href') === '/work') ||
-          (currentPath.startsWith('/contact') && link.getAttribute('href') === '/contact')) {
+    
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPath || 
+          (currentPath === '/' && href === '/') ||
+          (currentPath.startsWith('/work') && href === '/work') ||
+          (currentPath.startsWith('/contact') && href === '/contact')) {
         link.classList.add('btn-primary');
         link.classList.remove('btn-ghost');
       }
@@ -197,15 +211,34 @@ const links: Item[] = [
     navLinks.forEach(link => {
       link.addEventListener('mouseenter', function() {
         if (!this.classList.contains('btn-primary')) {
-          this.style.transform = 'scale(1.1) rotate(5deg)';
+          this.style.transform = 'scale(1.1)';
+          this.style.transition = 'transform 0.3s ease';
         }
       });
       
       link.addEventListener('mouseleave', function() {
         if (!this.classList.contains('btn-primary')) {
-          this.style.transform = 'scale(1) rotate(0deg)';
+          this.style.transform = 'scale(1)';
         }
       });
+    });
+    
+    // Add keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+      // Toggle theme with T key
+      if (e.key.toLowerCase() === 't' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        switchTheme();
+      }
+      
+      // Scroll to top with Home key
+      if (e.key === 'Home' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
     });
   });
 </script>

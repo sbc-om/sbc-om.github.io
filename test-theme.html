@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-base-100 text-base-content transition-all duration-500">
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl font-bold mb-6">Theme Switching Test</h1>
+        <p class="mb-4">Current theme: <span id="current-theme" class="font-semibold text-primary"></span></p>
+        
+        <button id="theme-btn" class="btn btn-primary mb-4">Switch Theme</button>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="card bg-base-200 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title text-primary">Primary Card</h2>
+                    <p>This card demonstrates primary colors.</p>
+                </div>
+            </div>
+            <div class="card bg-base-200 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title text-secondary">Secondary Card</h2>
+                    <p>This card demonstrates secondary colors.</p>
+                </div>
+            </div>
+            <div class="card bg-base-200 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title text-accent">Accent Card</h2>
+                    <p>This card demonstrates accent colors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const themes = ['light', 'dark', 'cupcake', 'forest', 'synthwave', 'cyberpunk', 'abyss'];
+        let currentThemeIndex = 0;
+        
+        function updateTheme() {
+            const theme = themes[currentThemeIndex];
+            document.documentElement.setAttribute('data-theme', theme);
+            document.getElementById('current-theme').textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+        }
+        
+        function switchTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            updateTheme();
+        }
+        
+        document.getElementById('theme-btn').addEventListener('click', switchTheme);
+        
+        // Initialize
+        updateTheme();
+    </script>
+</body>
+</html>
