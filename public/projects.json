@@ -1,0 +1,70 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "DeFi Trading Platform",
+      "category": "Blockchain",
+      "description": "Advanced decentralized trading platform with smart contract integration and real-time analytics.",
+      "technologies": ["Solidity", "React", "Web3.js", "Node.js"],
+      "status": "Completed",
+      "year": "2024",
+      "image": "/banner.jpg",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "AI-Powered Analytics Dashboard",
+      "category": "Artificial Intelligence",
+      "description": "Machine learning dashboard for business intelligence with predictive analytics and data visualization.",
+      "technologies": ["Python", "TensorFlow", "React", "D3.js"],
+      "status": "Completed",
+      "year": "2024",
+      "image": "/banner.jpg",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "E-Commerce Mobile App",
+      "category": "Mobile Applications",
+      "description": "Cross-platform mobile application with modern UI/UX and seamless payment integration.",
+      "technologies": ["React Native", "Node.js", "MongoDB", "Stripe"],
+      "status": "Completed",
+      "year": "2023",
+      "image": "/banner.jpg",
+      "featured": false
+    },
+    {
+      "id": 4,
+      "title": "Corporate Website Redesign",
+      "category": "Website Design",
+      "description": "Modern corporate website with responsive design and optimized performance.",
+      "technologies": ["Astro", "TailwindCSS", "TypeScript", "Vercel"],
+      "status": "Completed",
+      "year": "2023",
+      "image": "/banner.jpg",
+      "featured": false
+    },
+    {
+      "id": 5,
+      "title": "Smart Contract Audit Tool",
+      "category": "Blockchain",
+      "description": "Automated smart contract security analysis tool with vulnerability detection.",
+      "technologies": ["Solidity", "Python", "Flask", "PostgreSQL"],
+      "status": "In Progress",
+      "year": "2024",
+      "image": "/banner.jpg",
+      "featured": true
+    },
+    {
+      "id": 6,
+      "title": "Enterprise Software Suite",
+      "category": "Software Consulting",
+      "description": "Custom enterprise software solution for workflow automation and team collaboration.",
+      "technologies": ["Next.js", "PostgreSQL", "Docker", "AWS"],
+      "status": "Completed",
+      "year": "2023",
+      "image": "/banner.jpg",
+      "featured": false
+    }
+  ]
+}

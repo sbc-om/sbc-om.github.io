@@ -1,251 +1,303 @@
 ---
-import Heading from "@components/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import EnhancedPortfolio from "@components/sections/EnhancedPortfolio.astro";
 
 interface Project {
-  name: string;
-  desc: string;
-  link: string | null;
-  ghLink: string | null;
-  tech: string[];
-  category: 'blockchain' | 'ai' | 'defi' | 'enterprise';
-  featured?: boolean;
-  status: 'live' | 'development' | 'completed';
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  technologies: string[];
+  status: string;
+  year: string;
+  image: string;
+  featured: boolean;
 }
 
-const projects: Project[] = [
-  {
-    name: "DeFi Vault",
-    desc: "A revolutionary decentralized finance platform enabling secure and transparent lending and borrowing using cutting-edge blockchain technology with advanced yield optimization strategies.",
-    tech: ["Ethereum Smart Contracts", "Solidity", "Web3.js", "React", "TailwindCSS", "Metamask Integration", "Chainlink Oracles"],
-    link: "https://defivault.seniorblockchain.io",
-    ghLink: "https://github.com/seniorblockchain/defivault",
-    category: "defi",
-    featured: true,
-    status: "live"
-  },
-  {
-    name: "AI-Powered Investment Tracker",
-    desc: "An intelligent investment management platform that provides real-time analytics, portfolio optimization, and predictive market analysis using advanced machine learning algorithms.",
-    tech: ["Python", "TensorFlow", "Flask", "React", "TailwindCSS", "CoinGecko API", "PostgreSQL", "Redis"],
-    link: "https://investmenttracker.seniorblockchain.io",
-    ghLink: "https://github.com/seniorblockchain/investmenttracker",
-    category: "ai",
-    featured: true,
-    status: "live"
-  },
-  {
-    name: "Blockchain Voting System",
-    desc: "A secure, tamper-proof blockchain-based voting system ensuring complete transparency and integrity for democratic elections with real-time vote counting and verification.",
-    tech: ["Hyperledger Fabric", "Node.js", "React", "Docker", "Kubernetes", "TailwindCSS", "MongoDB"],
-    link: "https://votingsystem.seniorblockchain.io",
-    ghLink: "https://github.com/seniorblockchain/votingsystem",
-    category: "blockchain",
-    featured: true,
-    status: "live"
-  },
-  {
-    name: "AI Legal Advisor",
-    desc: "An AI-powered legal assistant that provides intelligent document analysis, contract review, and comprehensive risk assessment for businesses and legal professionals.",
-    tech: ["Python", "OpenAI GPT-4", "FastAPI", "Vue.js", "TailwindCSS", "MongoDB", "Elasticsearch"],
-    link: "https://ailegaladvisor.seniorblockchain.io",
-    ghLink: "https://github.com/seniorblockchain/ailegaladvisor",
-    category: "ai",
-    status: "live"
-  },
-  {
-    name: "Supply Chain Tracker",
-    desc: "A comprehensive blockchain solution for real-time tracking and verification of goods in supply chains, improving transparency and reducing fraud across global logistics.",
-    tech: ["Ethereum", "IPFS", "Solidity", "React", "GraphQL", "Material-UI", "Docker"],
-    link: "https://supplychain.seniorblockchain.io",
-    ghLink: "https://github.com/seniorblockchain/supplychain",
-    category: "enterprise",
-    status: "live"
-  },
-  {
-    name: "NFT Marketplace",
-    desc: "A next-generation NFT marketplace with advanced features including fractional ownership, royalty management, and cross-chain compatibility.",
-    tech: ["Ethereum", "Polygon", "IPFS", "React", "Web3.js", "MetaMask", "Pinata"],
-    link: "https://nftmarket.seniorblockchain.io",
-    ghLink: "https://github.com/seniorblockchain/nftmarket",
-    category: "blockchain",
-    status: "development"
-  },
-  {
-    name: "Predictive Analytics Platform",
-    desc: "Advanced AI platform for business intelligence and predictive analytics, helping companies make data-driven decisions with machine learning insights.",
-    tech: ["Python", "Scikit-learn", "Django", "React", "D3.js", "PostgreSQL", "Apache Kafka"],
-    link: null,
-    ghLink: "https://github.com/seniorblockchain/analytics",
-    category: "ai",
-    status: "development"
-  },
-  {
-    name: "Cross-Chain Bridge",
-    desc: "Secure and efficient cross-chain bridge enabling seamless asset transfers between different blockchain networks with minimal fees and maximum security.",
-    tech: ["Solidity", "Rust", "Substrate", "React", "Ethers.js", "Chainlink", "Docker"],
-    link: null,
-    ghLink: "https://github.com/seniorblockchain/bridge",
-    category: "defi",
-    status: "development"
-  }
-];
+interface ProjectsData {
+  projects: Project[];
+}
 
+// Fetch projects from JSON file
+const response = await fetch(`${Astro.url.origin}/projects.json`);
+const data: ProjectsData = await response.json();
+const { projects } = data;
+
+// Separate featured and regular projects
+const featuredProjects = projects.filter(p => p.featured);
+const regularProjects = projects.filter(p => !p.featured);
+
+// Get unique categories for filter
+const categories = ["All", ...new Set(projects.map(p => p.category))];
+
+// Calculate stats automatically from projects data
 const stats = {
-  totalProjects: projects.length,
-  liveProjects: projects.filter(p => p.status === 'live').length,
-  technologies: [...new Set(projects.flatMap(p => p.tech))].length,
-  categories: [...new Set(projects.map(p => p.category))].length
+  total: projects.length,
+  completed: projects.filter(p => p.status === 'Completed').length,
+  inProgress: projects.filter(p => p.status === 'In Progress').length,
+  categories: [...new Set(projects.map(p => p.category))].length,
+  technologies: [...new Set(projects.flatMap(p => p.technologies))].length,
+  years: [...new Set(projects.map(p => p.year))].sort(),
+  latestYear: [...new Set(projects.map(p => p.year))].sort().pop() || ''
 };
 ---
 
-<BaseLayout title="Work & Projects">
-  <!-- Hero Section -->
-  <section class="py-20 bg-gradient-to-br from-base-100 via-base-200 to-base-300">
-    <div class="max-w-7xl mx-auto px-8 text-center">
-      <h1 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
-        Our Projects
+<BaseLayout title="Our Portfolio - Senior Blockchain Company">
+  <!-- Hero Section with Stats -->
+  <section class="py-20 bg-gradient-to-br from-base-100 to-base-200">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+        Our Portfolio
       </h1>
-      <p class="text-xl md:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed mb-12">
-        Explore our innovative projects in blockchain and AI that are transforming industries worldwide
+      <p class="text-xl text-base-content/70 leading-relaxed max-w-3xl mx-auto mb-12">
+        Explore our professional software solutions that transform ideas into reality
       </p>
       
-      <!-- Quick Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
-          <div class="text-3xl font-black text-primary">{stats.totalProjects}</div>
-          <div class="text-sm font-medium text-base-content/70">Total Projects</div>
+      <!-- Project Stats - Automatically generated from projects data -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
+          <div class="text-3xl font-bold text-primary mb-1">{stats.total}</div>
+          <div class="text-sm text-base-content/60">Total Projects</div>
         </div>
-        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
-          <div class="text-3xl font-black text-success">{stats.liveProjects}</div>
-          <div class="text-sm font-medium text-base-content/70">Live Projects</div>
+        
+        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
+          <div class="flex justify-center items-center">
+            <div class="text-3xl font-bold text-success mb-1">{stats.completed}</div>
+            {stats.inProgress > 0 && (
+              <div class="text-sm text-warning font-medium ml-2">+{stats.inProgress} in progress</div>
+            )}
+          </div>
+          <div class="text-sm text-base-content/60">Completed Projects</div>
         </div>
-        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
-          <div class="text-3xl font-black text-secondary">{stats.technologies}</div>
-          <div class="text-sm font-medium text-base-content/70">Technologies</div>
+        
+        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
+          <div class="text-3xl font-bold text-secondary mb-1">{stats.categories}</div>
+          <div class="text-sm text-base-content/60">Project Categories</div>
         </div>
-        <div class="bg-base-100 rounded-2xl p-6 shadow-lg border border-base-300">
-          <div class="text-3xl font-black text-accent">{stats.categories}</div>
-          <div class="text-sm font-medium text-base-content/70">Categories</div>
+        
+        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
+          <div class="text-3xl font-bold text-accent mb-1">{stats.technologies}</div>
+          <div class="text-sm text-base-content/60">Technologies Used</div>
         </div>
       </div>
+      
+      {/* Additional stats showing date range for experience */}
+      {stats.years.length > 1 && (
+        <div class="mt-8 bg-base-100/50 inline-block py-2 px-6 rounded-full shadow-sm">
+          <span class="text-base-content/70">Experience since {stats.years[0]} to {stats.latestYear}</span>
+        </div>
+      )}
     </div>
   </section>
 
-  <!-- Enhanced Portfolio Section -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-8">
-      <!-- All Projects Grid -->
-      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+  <!-- Featured Projects Showcase -->
+  {featuredProjects.length > 0 && (
+    <section class="py-20 bg-base-100">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-bold text-primary">Featured Projects</h2>
+          <p class="text-base-content/60 text-lg mt-2 md:mt-0">Our best work showcased</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-10">
+          {featuredProjects.slice(0, 2).map((project) => (
+            <div class="group bg-base-100 rounded-2xl overflow-hidden shadow-lg border border-base-300/50 hover:shadow-xl transition-all duration-300">
+              <div class="aspect-video w-full bg-base-200 overflow-hidden">
+                {project.image ? (
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+                    <span class="text-primary/30 text-4xl font-bold">{project.title.charAt(0)}</span>
+                  </div>
+                )}
+              </div>
+              
+              <div class="p-8">
+                <div class="flex items-center justify-between mb-4">
+                  <span class="badge badge-primary">{project.category}</span>
+                  <div class="flex items-center">
+                    <span class={`badge ${project.status === 'Completed' ? 'badge-success' : 'badge-warning'}`}>
+                      {project.status}
+                    </span>
+                  </div>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-base-content mb-4">
+                  {project.title}
+                </h3>
+                
+                <p class="text-base-content/70 leading-relaxed mb-6">
+                  {project.description}
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech) => (
+                    <span class="px-3 py-1 bg-base-200 rounded-full text-sm text-base-content/80">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                
+                <div class="flex justify-between items-center mt-6">
+                  <span class="text-base-content/50">{project.year}</span>
+                  <button class="btn btn-sm btn-primary btn-outline">View Details</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Project Gallery with Filters -->
+  <section class="py-20 bg-base-200/50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Complete Portfolio</h2>
+        <p class="text-base-content/70 text-lg max-w-2xl mx-auto">
+          Browse our extensive collection of {stats.total} projects across {stats.categories} categories
+        </p>
+      </div>
+      
+      <!-- Category Filters - Dynamically generated from project categories -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12" id="category-filters">
+        {categories.map((category) => (
+          <button 
+            class="px-4 py-2 rounded-full bg-base-100 hover:bg-primary hover:text-primary-content transition-colors duration-300 text-sm font-medium category-filter"
+            data-category={category}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      
+      <!-- Projects Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
         {projects.map((project) => (
-          <div class="group bg-base-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-base-300 relative overflow-hidden">
-            <!-- Status Badge -->
-            <div class="absolute top-4 right-4">
-              <span class={`px-3 py-1 text-xs font-semibold rounded-full ${
-                project.status === 'live' ? 'bg-success/20 text-success' :
-                project.status === 'development' ? 'bg-warning/20 text-warning' :
-                'bg-info/20 text-info'
-              }`}>
-                {project.status === 'live' ? '🟢 Live' : 
-                 project.status === 'development' ? '🟡 In Development' : 
-                 '✅ Completed'}
-              </span>
+          <div 
+            class="project-card bg-base-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-base-300/50"
+            data-category={project.category}
+          >
+            <!-- Project thumbnail -->
+            <div class="h-48 bg-base-200 overflow-hidden">
+              {project.image ? (
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+                  <span class="text-primary/30 text-3xl font-bold">{project.title.charAt(0)}</span>
+                </div>
+              )}
             </div>
-
-            <!-- Project Header -->
-            <div class="mb-6">
-              <h3 class="text-2xl font-bold text-primary group-hover:text-secondary transition-colors duration-300 mb-2">
-                {project.name}
+            
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-sm font-medium text-primary">
+                  {project.category}
+                </span>
+                <div class="flex items-center space-x-1">
+                  <span class={`w-2 h-2 rounded-full ${
+                    project.status === 'Completed' ? 'bg-success' : 
+                    project.status === 'In Progress' ? 'bg-warning' : 
+                    'bg-info'
+                  }`}></span>
+                  <span class="text-xs text-base-content/50">{project.status}</span>
+                </div>
+              </div>
+              
+              <h3 class="text-lg font-bold text-base-content mb-2">
+                {project.title}
               </h3>
-              <span class="inline-block px-3 py-1 text-xs font-semibold bg-primary/10 text-primary rounded-full capitalize">
-                {project.category}
-              </span>
-            </div>
-
-            <!-- Project Description -->
-            <p class="text-base-content/80 leading-relaxed mb-6 line-clamp-4">
-              {project.desc}
-            </p>
-
-            <!-- Tech Stack -->
-            <div class="mb-6">
-              <h4 class="font-bold text-base-content mb-3">Technologies:</h4>
-              <div class="flex flex-wrap gap-2">
-                {project.tech.slice(0, 4).map((tech) => (
-                  <span class="px-2 py-1 text-xs bg-base-200 text-base-content rounded-lg font-medium">
+              
+              <p class="text-base-content/70 text-sm leading-relaxed mb-4 line-clamp-3">
+                {project.description}
+              </p>
+              
+              <div class="flex flex-wrap gap-1 mb-4">
+                {project.technologies.slice(0, 3).map((tech) => (
+                  <span class="text-xs bg-base-200 text-base-content/70 px-2 py-1 rounded">
                     {tech}
                   </span>
                 ))}
-                {project.tech.length > 4 && (
-                  <span class="px-2 py-1 text-xs bg-accent/20 text-accent rounded-lg font-medium">
-                    +{project.tech.length - 4} more
+                {project.technologies.length > 3 && (
+                  <span class="text-xs bg-base-200 text-base-content/70 px-2 py-1 rounded">
+                    +{project.technologies.length - 3}
                   </span>
                 )}
               </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex gap-3">
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  class="btn btn-primary btn-sm flex-1 group/btn"
-                >
-                  <i class="fa-solid fa-external-link mr-2 group-hover/btn:translate-x-1 transition-transform duration-300"></i>
-                  Live Demo
-                </a>
-              )}
-              {project.ghLink && (
-                <a
-                  href={project.ghLink}
-                  target="_blank"
-                  class="btn btn-outline btn-sm"
-                >
-                  <i class="fa-brands fa-github text-lg"></i>
-                </a>
-              )}
+              
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-base-content/50">{project.year}</span>
+                <button class="btn btn-xs btn-ghost">Details</button>
+              </div>
             </div>
           </div>
         ))}
       </div>
+    </div>
+  </section>
 
-      <!-- CTA Section -->
-      <div class="text-center mt-16 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-          Have a Project in Mind?
-        </h3>
-        <p class="text-lg text-base-content/80 mb-6 max-w-2xl mx-auto">
-          Let's discuss how we can bring your vision to life with cutting-edge blockchain and AI solutions
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="/contact"
-            class="btn btn-primary btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
-          >
-            <span class="mr-2">Start Your Project</span>
-            <i class="fa-solid fa-rocket group-hover:translate-y-[-2px] transition-transform duration-300"></i>
-          </a>
-          <a 
-            href="https://github.com/seniorblockchain"
-            target="_blank"
-            class="btn btn-outline btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
-          >
-            <span class="mr-2">View on GitHub</span>
-            <i class="fa-brands fa-github group-hover:scale-110 transition-transform duration-300"></i>
-          </a>
-        </div>
+  <!-- Call To Action -->
+  <section class="py-16 bg-gradient-to-br from-primary/10 to-primary/5">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-base-content mb-4">Ready to Build Your Project?</h2>
+      <p class="text-base-content/70 text-lg mb-8 max-w-xl mx-auto">
+        Let our team of experts bring your vision to life with cutting-edge technology
+      </p>
+      <div class="flex justify-center">
+        <a 
+          href="/contact"
+          class="btn btn-primary btn-lg px-8"
+        >
+          Get a Quote
+        </a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
-<style>
-  .line-clamp-4 {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
+<script>
+  // Category filtering functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.category-filter');
+    const projectCards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
+    
+    // Set "All" as active by default
+    const allButton = document.querySelector('[data-category="All"]');
+    if (allButton) {
+      allButton.classList.add('bg-primary', 'text-primary-content');
+    }
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-primary-content');
+        });
+        
+        // Add active class to clicked button
+        button.classList.add('bg-primary', 'text-primary-content');
+        
+        const category = button.getAttribute('data-category');
+        
+        // Show/hide projects based on category
+        projectCards.forEach(card => {
+          if (category === 'All' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+

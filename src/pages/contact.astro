@@ -1,118 +1,63 @@
 ---
-import Heading from "@components/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-interface Social {
-  link: string;
-  title: string;
-  body: string;
-  icon: string;
-  color: string;
-  hoverColor: string;
-}
-
-const socials: Social[] = [
-  {
-    link: "https://linkedin.com/company/seniorblockchain",
-    title: "LinkedIn",
-    body: "Connect with us professionally and stay updated with our latest announcements",
-    icon: "fa-brands fa-linkedin",
-    color: "text-blue-600",
-    hoverColor: "hover:bg-blue-50"
-  },
-  {
-    link: "https://twitter.com/seniorblock",
-    title: "Twitter",
-    body: "Follow us for real-time updates, industry insights, and behind-the-scenes content",
-    icon: "fa-brands fa-x-twitter",
-    color: "text-gray-800",
-    hoverColor: "hover:bg-gray-50"
-  },
-  {
-    link: "https://instagram.com/seniorblockchain",
-    title: "Instagram",
-    body: "Discover our company culture, team stories, and visual journey through innovation",
-    icon: "fa-brands fa-instagram",
-    color: "text-pink-600",
-    hoverColor: "hover:bg-pink-50"
-  },
-  {
-    link: "https://github.com/seniorblockchain",
-    title: "GitHub",
-    body: "Explore our open-source projects and contribute to the blockchain ecosystem",
-    icon: "fa-brands fa-github",
-    color: "text-gray-700",
-    hoverColor: "hover:bg-gray-50"
-  },
-  {
-    link: "https://t.me/seniorblockchain",
-    title: "Telegram",
-    body: "Join our community for instant updates and direct communication with our team",
-    icon: "fa-brands fa-telegram",
-    color: "text-blue-500",
-    hoverColor: "hover:bg-blue-50"
-  },
-  {
-    link: "mailto:post@sbc.om",
-    title: "Email",
-    body: "Reach out directly for business inquiries, partnerships, or collaboration opportunities",
-    icon: "fa-solid fa-envelope",
-    color: "text-primary",
-    hoverColor: "hover:bg-primary/5"
-  }
-];
 ---
 
-<BaseLayout title="Contact">
-  <!-- Hero Section -->
-  <section class="py-20 bg-gradient-to-br from-base-100 via-base-200 to-base-300">
-    <div class="max-w-7xl mx-auto px-8 text-center">
-      <h1 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
-        Get In Touch
-      </h1>
-      <p class="text-xl md:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed">
-        Ready to transform your business with cutting-edge blockchain and AI solutions? We'd love to hear from you.
+<BaseLayout title="Contact - Senior Blockchain Company">  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-br from-base-100 to-base-200">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <div class="mb-4 -mt-4">
+        <h1 class="text-sm md:text-lg font-bold text-primary mb-2">
+          Senior Blockchain Company
+        </h1>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-black text-base-content mb-4 tracking-tight">
+        Get Your Project Started
+      </h2>
+      <p class="text-lg text-base-content/70 leading-relaxed max-w-2xl mx-auto">
+        Transform your ideas into reality with our expert development team. Professional software solutions starting from 100 OMR.
       </p>
     </div>
   </section>
 
   <!-- Contact Form Section -->
-  <section class="py-20 bg-gradient-to-b from-base-100 to-base-200">
-    <div class="max-w-4xl mx-auto px-8">
-      <div class="bg-base-100 rounded-3xl p-8 md:p-12 shadow-2xl border border-base-300">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Start Your Project
-          </h2>
-          <p class="text-lg text-base-content/80">
-            Tell us about your vision and let's build something amazing together
+  <section class="py-16 bg-base-100">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="bg-base-200/30 rounded-3xl p-8 md:p-12 shadow-xl border border-base-300/50">
+        <div class="text-center mb-10">
+          <h3 class="text-2xl md:text-3xl font-bold text-primary mb-4">
+            Project Inquiry Form
+          </h3>
+          <p class="text-base-content/70 text-lg">
+            Tell us about your project and get a professional quote
           </p>
         </div>
 
-        <form class="space-y-6" id="contact-form">
+        <form class="space-y-8" id="contact-form">
+          <!-- Personal Information -->
           <div class="grid md:grid-cols-2 gap-6">
             <div class="form-control">
               <label class="label">
-                <span class="label-text font-semibold">Full Name *</span>
+                <span class="label-text font-semibold text-base">Full Name *</span>
               </label>
               <input 
                 type="text" 
                 name="name"
-                placeholder="John Doe" 
-                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
-                required 
+                placeholder="Enter your full name"
+                required
+                class="input input-bordered w-full focus:input-primary bg-base-100 text-base h-12"
               />
             </div>
+            
             <div class="form-control">
               <label class="label">
-                <span class="label-text font-semibold">Email Address *</span>
+                <span class="label-text font-semibold text-base">Email Address *</span>
               </label>
               <input 
                 type="email" 
                 name="email"
-                placeholder="john@company.com" 
-                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
-                required 
+                placeholder="your.email@example.com"
+                required
+                class="input input-bordered w-full focus:input-primary bg-base-100 text-base h-12"
               />
             </div>
           </div>
@@ -120,141 +65,196 @@ const socials: Social[] = [
           <div class="grid md:grid-cols-2 gap-6">
             <div class="form-control">
               <label class="label">
-                <span class="label-text font-semibold">Company</span>
-              </label>
-              <input 
-                type="text" 
-                name="company"
-                placeholder="Your Company" 
-                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
-              />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text font-semibold">Phone Number</span>
+                <span class="label-text font-semibold text-base">Phone Number</span>
               </label>
               <input 
                 type="tel" 
                 name="phone"
-                placeholder="+1 (555) 123-4567" 
-                class="input input-bordered w-full focus:input-primary transition-all duration-300" 
+                placeholder="+968 XXXX XXXX"
+                class="input input-bordered w-full focus:input-primary bg-base-100 text-base h-12"
               />
+            </div>
+
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold text-base">Company Name</span>
+              </label>
+              <input 
+                type="text" 
+                name="company"
+                placeholder="Your company (optional)"
+                class="input input-bordered w-full focus:input-primary bg-base-100 text-base h-12"
+              />
+            </div>
+          </div>
+
+          <!-- Project Details -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold text-base">Service Required *</span>
+              </label>
+              <select name="service" required class="select select-bordered w-full focus:select-primary bg-base-100 text-base h-12">
+                <option disabled selected>Select a service</option>
+                <option value="Programming">Programming & Development</option>
+                <option value="Website Design">Website Design & Development</option>
+                <option value="Mobile Applications">Mobile Applications</option>
+                <option value="Software Consulting">Software Consulting</option>
+                <option value="Blockchain Development">Blockchain Development</option>
+                <option value="Artificial Intelligence">Artificial Intelligence & ML</option>
+              </select>
+            </div>
+
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold text-base">Project Budget (OMR) *</span>
+              </label>
+              <select name="budget" required class="select select-bordered w-full focus:select-primary bg-base-100 text-base h-12">
+                <option disabled selected>Select budget range</option>
+                <option value="100 - 500 OMR">100 - 500 OMR</option>
+                <option value="500 - 1,500 OMR">500 - 1,500 OMR</option>
+                <option value="1,500 - 5,000 OMR">1,500 - 5,000 OMR</option>
+                <option value="5,000 - 15,000 OMR">5,000 - 15,000 OMR</option>
+                <option value="15,000+ OMR">15,000+ OMR</option>
+              </select>
             </div>
           </div>
 
           <div class="form-control">
             <label class="label">
-              <span class="label-text font-semibold">Project Type *</span>
+              <span class="label-text font-semibold text-base">Project Timeline</span>
             </label>
-            <select name="project-type" class="select select-bordered w-full focus:select-primary transition-all duration-300" required>
-              <option disabled selected>Select your project type</option>
-              <option value="blockchain">Blockchain Development</option>
-              <option value="ai">AI Solutions</option>
-              <option value="defi">DeFi Platform</option>
-              <option value="smart-contracts">Smart Contracts</option>
-              <option value="consulting">Consulting Services</option>
-              <option value="cybersecurity">Cybersecurity</option>
-              <option value="other">Other</option>
+            <select name="timeline" class="select select-bordered w-full focus:select-primary bg-base-100 text-base h-12">
+              <option disabled selected>When do you need this completed?</option>
+              <option value="ASAP">As soon as possible</option>
+              <option value="1-2 weeks">1-2 weeks</option>
+              <option value="1 month">Within 1 month</option>
+              <option value="2-3 months">2-3 months</option>
+              <option value="Flexible">Flexible timeline</option>
             </select>
           </div>
 
           <div class="form-control">
             <label class="label">
-              <span class="label-text font-semibold">Budget Range</span>
-            </label>
-            <select name="budget" class="select select-bordered w-full focus:select-primary transition-all duration-300">
-              <option disabled selected>Select your budget range</option>
-              <option value="10k-25k">$10,000 - $25,000</option>
-              <option value="25k-50k">$25,000 - $50,000</option>
-              <option value="50k-100k">$50,000 - $100,000</option>
-              <option value="100k+">$100,000+</option>
-              <option value="discuss">Let's discuss</option>
-            </select>
-          </div>
-
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text font-semibold">Project Description *</span>
+              <span class="label-text font-semibold text-base">Project Description *</span>
             </label>
             <textarea 
               name="message"
-              class="textarea textarea-bordered h-32 focus:textarea-primary transition-all duration-300" 
-              placeholder="Tell us about your project, goals, and requirements..."
+              placeholder="Please describe your project in detail:&#10;&#10;• What do you want to build?&#10;• Key features and functionality needed&#10;• Target audience&#10;• Any specific technologies or platforms&#10;• Reference websites or apps (if any)"
               required
+              class="textarea textarea-bordered h-40 w-full focus:textarea-primary resize-none bg-base-100 text-base leading-relaxed"
             ></textarea>
           </div>
 
-          <div class="text-center pt-6">
+          <div class="form-control pt-6">
             <button 
               type="submit" 
-              class="btn btn-primary btn-lg px-12 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
+              class="btn btn-primary w-full font-semibold text-lg h-14 rounded-xl"
+              id="submit-btn"
             >
-              <span class="mr-2">Send Message</span>
-              <i class="fa-solid fa-paper-plane group-hover:translate-x-1 transition-transform duration-300"></i>
+              <span id="submit-text">
+                <i class="fa-brands fa-whatsapp mr-2"></i>
+                Send Project Details via WhatsApp
+              </span>
+              <span id="submit-loading" class="loading loading-spinner loading-md hidden"></span>
             </button>
+          </div>
+
+          <div class="text-center text-sm text-base-content/60 mt-4">
+            <i class="fa-solid fa-shield-halved mr-1"></i>
+            Your information is secure and will only be used to contact you about your project
           </div>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- Social Media & Contact Info -->
-  <section class="py-20 bg-gradient-to-b from-base-200 to-base-100">
-    <div class="max-w-7xl mx-auto px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-          Connect With Us
-        </h2>
-        <p class="text-lg text-base-content/80 max-w-3xl mx-auto">
-          Follow us on social media for the latest updates, insights, and behind-the-scenes content from our team
-        </p>
+  <!-- Why Choose Us Section -->
+  <section class="py-16 bg-base-200/50">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h3 class="text-2xl md:text-3xl font-bold text-primary mb-4">Why Choose Senior Blockchain Company?</h3>
+        <p class="text-base-content/70 text-lg">Professional development services with transparent pricing</p>
       </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-code text-2xl text-primary"></i>
+          </div>
+          <h4 class="font-bold text-lg mb-3">Expert Development</h4>
+          <p class="text-base-content/70 text-sm leading-relaxed">Professional coding with latest technologies and best practices</p>
+        </div>
+        
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-coins text-2xl text-success"></i>
+          </div>
+          <h4 class="font-bold text-lg mb-3">Affordable Pricing</h4>
+          <p class="text-base-content/70 text-sm leading-relaxed">Competitive rates starting from 100 OMR with transparent pricing</p>
+        </div>
+        
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-info/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-clock text-2xl text-info"></i>
+          </div>
+          <h4 class="font-bold text-lg mb-3">Fast Delivery</h4>
+          <p class="text-base-content/70 text-sm leading-relaxed">Quick turnaround times without compromising on quality</p>
+        </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {socials.map((social, index) => (
-          <a
-            href={social.link}
-            target="_blank"
-            class={`group bg-base-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-base-300 ${social.hoverColor}`}
-            style={`animation-delay: ${index * 0.1}s`}
-          >
-            <div class="flex items-start space-x-4">
-              <div class={`text-3xl ${social.color} group-hover:scale-110 transition-transform duration-300`}>
-                <i class={social.icon}></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3 class="text-xl font-bold text-base-content mb-2 group-hover:text-primary transition-colors duration-300">
-                  {social.title}
-                </h3>
-                <p class="text-sm text-base-content/70 leading-relaxed">
-                  {social.body}
-                </p>
-              </div>
-              <div class="text-base-content/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300">
-                <i class="fa-solid fa-external-link"></i>
-              </div>
-            </div>
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-warning/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-headset text-2xl text-warning"></i>
+          </div>
+          <h4 class="font-bold text-lg mb-3">24/7 Support</h4>
+          <p class="text-base-content/70 text-sm leading-relaxed">Ongoing support and maintenance for your projects</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Information -->
+  <section class="py-16 bg-base-100">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h3 class="text-2xl font-bold text-primary mb-4">Ready to Start?</h3>
+        <p class="text-base-content/70 text-lg">Contact us directly through your preferred method</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
+            <i class="fa-brands fa-whatsapp text-3xl text-primary"></i>
+          </div>
+          <h4 class="font-bold text-xl mb-3">WhatsApp</h4>
+          <p class="text-base-content/70 mb-4">Get instant responses</p>
+          <a href="https://wa.me/96891200634" target="_blank" class="btn btn-outline btn-primary btn-sm">
+            <i class="fa-brands fa-whatsapp mr-2"></i>
+            +968 9120 0634
           </a>
-        ))}
-      </div>
-
-      <!-- Quick Contact Info -->
-      <div class="mt-16 text-center p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
-        <h3 class="text-2xl font-bold text-primary mb-4">
-          Prefer Direct Contact?
-        </h3>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <a 
-            href="mailto:post@sbc.om"
-            class="flex items-center text-lg font-medium text-base-content hover:text-primary transition-colors duration-300 group"
-          >
-            <i class="fa-solid fa-envelope mr-3 text-primary group-hover:scale-110 transition-transform duration-300"></i>
+        </div>
+        
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-info/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-info/20 transition-colors">
+            <i class="fa-solid fa-envelope text-3xl text-info"></i>
+          </div>
+          <h4 class="font-bold text-xl mb-3">Email</h4>
+          <p class="text-base-content/70 mb-4">Professional inquiries</p>
+          <a href="mailto:post@sbc.om" class="btn btn-outline btn-info btn-sm">
+            <i class="fa-solid fa-envelope mr-2"></i>
             post@sbc.om
           </a>
-          <div class="hidden sm:block w-px h-6 bg-base-content/20"></div>
-          <div class="flex items-center text-lg font-medium text-base-content">
-            <i class="fa-solid fa-clock mr-3 text-secondary"></i>
-            Response within 24 hours
+        </div>
+        
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-success/20 transition-colors">
+            <i class="fa-solid fa-clock text-3xl text-success"></i>
+          </div>
+          <h4 class="font-bold text-xl mb-3">Response Time</h4>
+          <p class="text-base-content/70 mb-4">Quick replies guaranteed</p>
+          <div class="badge badge-success badge-lg">
+            <i class="fa-solid fa-bolt mr-1"></i>
+            Within 2 hours
           </div>
         </div>
       </div>
@@ -262,68 +262,62 @@ const socials: Social[] = [
   </section>
 </BaseLayout>
 
-<script>
-  // Contact form handling
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        // Basic validation
-        if (!data.name || !data.email || !data.message) {
-          alert('Please fill in all required fields.');
-          return;
-        }
-        
-        // Show loading state
-        const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Sending...';
-        submitBtn.disabled = true;
-        
-        // Simulate form submission (replace with actual endpoint)
-        setTimeout(() => {
-          alert('Thank you for your message! We\'ll get back to you within 24 hours.');
-          form.reset();
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 2000);
-      });
-    }
-    
-    // Add animation to cards on scroll
-    const cards = document.querySelectorAll('.group');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    cards.forEach(card => observer.observe(card));
-  });
-</script>
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
+  const submitLoading = document.getElementById('submit-loading');
 
-<style>
-  .animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out both;
+  if (form && submitBtn && submitText && submitLoading) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitText.classList.add('hidden');
+      submitLoading.classList.remove('hidden');
+      
+      // Get form data
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+      
+      // Prepare WhatsApp message
+      let message = '*New Project Inquiry - Senior Blockchain Company*\n\n';
+      message += '*Name:* ' + data.name + '\n';
+      message += '*Email:* ' + data.email + '\n';
+      if (data.phone) message += '*Phone:* ' + data.phone + '\n';
+      if (data.company) message += '*Company:* ' + data.company + '\n';
+      message += '*Service:* ' + data.service + '\n';
+      if (data.budget) message += '*Budget:* ' + data.budget + '\n';
+      if (data.timeline) message += '*Timeline:* ' + data.timeline + '\n';
+      message += '\n*Project Description:*\n' + data.message;
+      
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappURL = 'https://wa.me/96891200634?text=' + encodedMessage;
+      
+      // Open WhatsApp in new tab
+      window.open(whatsappURL, '_blank');
+      
+      // Reset form and show success message
+      setTimeout(() => {
+        form.reset();
+        alert('Message prepared! Please send it via WhatsApp.');
+        resetSubmitButton();
+      }, 1000);
+    });
   }
   
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 40px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
+  function resetSubmitButton() {
+    if (submitBtn && submitText && submitLoading) {
+      submitBtn.disabled = false;
+      submitText.classList.remove('hidden');
+      submitLoading.classList.add('hidden');
     }
   }
-</style>
+});
+</script>
