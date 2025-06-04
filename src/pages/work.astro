@@ -17,10 +17,21 @@ interface ProjectsData {
   projects: Project[];
 }
 
-// Fetch projects from JSON file
-const response = await fetch(`${Astro.url.origin}/projects.json`);
-const data: ProjectsData = await response.json();
-const { projects } = data;
+// Import projects data directly instead of fetching
+import { promises as fs } from 'fs';
+import path from 'path';
+
+// Read projects data from the filesystem during build time
+let projects: Project[] = [];
+try {
+  const filePath = path.resolve('./public/projects.json');
+  const fileContent = await fs.readFile(filePath, 'utf-8');
+  const data: ProjectsData = JSON.parse(fileContent);
+  projects = data.projects;
+} catch (error) {
+  console.error('Error loading projects data:', error);
+  projects = []; // Fallback to empty array if file can't be loaded
+}
 
 // Separate featured and regular projects
 const featuredProjects = projects.filter(p => p.featured);
@@ -133,8 +144,7 @@ const stats = {
                   {project.description}
                 </p>
                 
-                <div class="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
+                <div class="flex flex-wrap gap-2 mb-4">                  {project.technologies.map((tech: string) => (
                     <span class="px-3 py-1 bg-base-200 rounded-full text-sm text-base-content/80">
                       {tech}
                     </span>
@@ -220,8 +230,7 @@ const stats = {
                 {project.description}
               </p>
               
-              <div class="flex flex-wrap gap-1 mb-4">
-                {project.technologies.slice(0, 3).map((tech) => (
+              <div class="flex flex-wrap gap-1 mb-4">                {project.technologies.slice(0, 3).map((tech: string) => (
                   <span class="text-xs bg-base-200 text-base-content/70 px-2 py-1 rounded">
                     {tech}
                   </span>
