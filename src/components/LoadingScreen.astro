@@ -2,11 +2,8 @@
 ---
 
 <div id="loading-screen" class="fixed inset-0 z-[9999] bg-base-100 flex items-center justify-center">  <div class="text-center">
-    <!-- Simple Spinner -->
-    <div class="w-8 h-8 border-2 border-primary border-t-transparent rounded-full spinner mx-auto mb-4"></div>
-    
-    <!-- Simple Text -->
-    <p class="text-primary font-medium">Loading...</p>
+    <!-- Simple Text Only -->
+    <p class="text-primary font-medium text-lg">Loading...</p>
   </div>
 </div>
 
@@ -40,18 +37,5 @@
 <style>
   #loading-screen {
     transition: opacity 0.3s ease;
-  }
-  
-  .spinner {
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
   }
 </style>
