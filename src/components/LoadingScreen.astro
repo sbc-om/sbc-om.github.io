@@ -1,53 +1,31 @@
 ---
 ---
 
-<div id="loading-screen" class="fixed inset-0 z-[9999] bg-base-100 flex items-center justify-center">
-  <div class="text-center">
-    <!-- Simple Logo -->
-    <div class="w-20 h-20 mx-auto mb-6 relative">
-      <div class="absolute inset-0 bg-primary/20 rounded-full"></div>
-      <div class="absolute inset-0 border-4 border-transparent border-t-primary rounded-full animate-spin"></div>
-      <div class="absolute inset-0 flex items-center justify-center">
-        <i class="fa-solid fa-cube text-primary text-2xl"></i>
-      </div>
-    </div>
+<div id="loading-screen" class="fixed inset-0 z-[9999] bg-base-100 flex items-center justify-center">  <div class="text-center">
+    <!-- Simple Spinner -->
+    <div class="w-8 h-8 border-2 border-primary border-t-transparent rounded-full spinner mx-auto mb-4"></div>
     
     <!-- Simple Text -->
-    <h2 class="text-xl font-bold text-primary mb-2">Senior Blockchain Company</h2>
-    
-    <!-- Simple Progress Bar -->
-    <div class="w-48 h-1 bg-base-300 rounded-full mx-auto mt-4 overflow-hidden">
-      <div id="progress-bar" class="h-full bg-primary rounded-full" style="width: 0%"></div>
-    </div>
+    <p class="text-primary font-medium">Loading...</p>
   </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loading-screen');
-    const progressBar = document.getElementById('progress-bar');
     
-    if (loadingScreen && progressBar) {
-      // Simple progress animation
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 5;
-        if (progress > 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            loadingScreen.style.opacity = '0';
-            setTimeout(() => {
-              loadingScreen.style.display = 'none';
-            }, 300);
-          }, 200);
-        } else {
-          progressBar.style.width = `${progress}%`;
-        }
-      }, 50);
+    if (loadingScreen) {
+      // Hide loading screen after 1 second
+      setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 300);
+      }, 1000);
     }
   });
   
-  // Ensure the loading screen is removed even if animation didn't complete
+  // Ensure the loading screen is removed when page loads
   window.addEventListener('load', () => {
     const loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen) {
@@ -62,5 +40,18 @@
 <style>
   #loading-screen {
     transition: opacity 0.3s ease;
+  }
+  
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>
