@@ -1,29 +1,31 @@
 ---
-interface Item {
+import Icon from "./Icon.astro";
+
+interface Link {
   title: string;
   link: string;
   icon: string;
   color: string;
 }
 
-const links: Item[] = [
+const links: Link[] = [
   {
     title: "Home",
     link: "/",
-    icon: "fa-solid fa-house",
-    color: "hover:text-primary"
+    icon: "house",
+    color: "text-blue-400",
   },
   {
-    title: "Work",
+    title: "Projects",
     link: "/work",
-    icon: "fa-solid fa-suitcase",
-    color: "hover:text-secondary"
+    icon: "suitcase",
+    color: "text-green-400",
   },
   {
     title: "Contact",
     link: "/contact",
-    icon: "fa-solid fa-envelope",
-    color: "hover:text-success"
+    icon: "envelope",
+    color: "text-orange-400",
   },
 ];
 ---
@@ -38,7 +40,7 @@ const links: Item[] = [
           href={link} 
           class="w-10 h-10 flex items-center justify-center rounded-md bg-base-100 hover:bg-base-200 transition-colors duration-200"
         >
-          <i class={`${icon} text-lg`}></i>
+          <Icon name={icon} size={20} />
         </a>
       </li>
     ))}  </ul>
@@ -50,7 +52,7 @@ const links: Item[] = [
   class="fixed bottom-24 right-6 md:bottom-6 md:right-6 btn btn-circle btn-primary shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 z-40"
   aria-label="Back to top"
 >
-  <i class="fa-solid fa-arrow-up text-lg"></i>
+  <Icon name="arrow-up" size={20} />
 </button>
 
 <script>

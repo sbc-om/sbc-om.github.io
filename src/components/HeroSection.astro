@@ -1,4 +1,6 @@
 ---
+import MotionDiv from "./MotionDiv.tsx";
+import MotionButton from "./MotionButton.tsx";
 ---
 
 <section class="relative w-screen h-screen flex justify-center items-center overflow-hidden bg-gradient-to-br from-base-100 via-base-200 to-base-300">
@@ -21,46 +23,52 @@
     <!-- Main Content with Improved Spacing -->
   <div class="relative z-10 flex flex-col gap-8 text-center px-6 max-w-6xl mx-auto -mt-12">
     <!-- Company Name with Elegant Styling -->
-    <div class="mb-2">
-      <h1 class="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-        Senior Blockchain Company
-      </h1>
-    </div>
+    <MotionDiv client:load animation="slideDown" delay={0} duration={0.8}>
+      <div class="mb-2">
+        <h1 class="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          Senior Blockchain Company
+        </h1>
+      </div>
+    </MotionDiv>
     
     <!-- Main Title with Enhanced Typography -->
-    <div class="space-y-6">
-      <!-- Improved Dynamic Typing Effect -->
-      <div class="h-20 md:h-24 lg:h-28 flex items-center justify-center">
-        <h2 id="typing-text" class="text-3xl md:text-5xl lg:text-6xl font-black text-base-content tracking-tight leading-tight min-h-[1.2em]">
-          <span class="text-primary">Professional Software Solutions</span>
-        </h2>
+    <MotionDiv client:load animation="scale" delay={0.2} duration={0.8}>
+      <div class="space-y-6">
+        <!-- Improved Dynamic Typing Effect -->
+        <div class="h-20 md:h-24 lg:h-28 flex items-center justify-center">
+          <h2 id="typing-text" class="text-3xl md:text-5xl lg:text-6xl font-black text-base-content tracking-tight leading-tight min-h-[1.2em]">
+            <span class="text-primary">Professional Software Solutions</span>
+          </h2>
+        </div>
       </div>
-    </div>
+    </MotionDiv>
     
     <!-- Subtitle with Better Line Height and Spacing -->
-    <p class="text-lg md:text-xl lg:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed animate-fade-in-up delay-500 py-2">
-      Leading <span class="text-primary font-semibold">software development</span> with expertise in 
-      <span class="text-secondary font-semibold">blockchain & AI</span> innovation for modern businesses
-    </p>
+    <MotionDiv client:load animation="fade" delay={0.4} duration={0.8}>
+      <p class="text-lg md:text-xl lg:text-2xl text-base-content/80 max-w-4xl mx-auto leading-relaxed py-2">
+        Leading <span class="text-primary font-semibold">software development</span> with expertise in 
+        <span class="text-secondary font-semibold">blockchain & AI</span> innovation for modern businesses
+      </p>
+    </MotionDiv>
 
     <!-- Enhanced CTA Buttons with More Space -->
-    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up delay-700 mt-4">
-      <a
-        href="#about"
-        class="btn btn-primary btn-lg text-white font-bold px-10 py-5 rounded-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
-      >
-        <span class="mr-2">About Us</span>
-        <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform duration-300"></i>
-      </a>
-      
-      <a
-        href="/work"
-        class="btn btn-outline btn-lg font-bold px-10 py-5 rounded-full hover:scale-105 transition-all duration-300 group"
-      >
-        <span class="mr-2">View Projects</span>
-        <i class="fa-solid fa-external-link group-hover:translate-x-1 transition-transform duration-300"></i>
-      </a>
-    </div>
+    <MotionDiv client:load animation="slideUp" delay={0.6} duration={0.8}>
+      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mt-4">
+        <MotionButton client:load href="#about" className="btn btn-primary btn-lg text-white font-bold px-10 py-5 rounded-full shadow-lg hover:shadow-xl group">
+          <span class="mr-2">About Us</span>
+          <svg class="w-5 h-5 inline group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </MotionButton>
+        
+        <MotionButton client:load href="/work" className="btn btn-outline btn-lg font-bold px-10 py-5 rounded-full group">
+          <span class="mr-2">View Projects</span>
+          <svg class="w-5 h-5 inline group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </MotionButton>
+      </div>
+    </MotionDiv>
   </div>
 
   <!-- Enhanced Scroll Indicator -->

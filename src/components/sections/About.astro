@@ -2,6 +2,9 @@
 import HoverSpan from "@components/HoverSpan.astro";
 import me from "@assets/sbc-logo-about.svg";
 import { Image } from "astro:assets";
+import MotionDiv from "../MotionDiv.tsx";
+import MotionStagger, { MotionStaggerItem } from "../MotionStagger.tsx";
+import Icon from "../Icon.astro";
 ---
 
 <section id="about" class="py-20 bg-gradient-to-b from-base-100 to-base-200">
@@ -10,63 +13,84 @@ import { Image } from "astro:assets";
       <!-- Content Side -->
       <div class="space-y-8 order-2 lg:order-1">
         <!-- Section Header -->
-        <div>
-          <h2 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
-            About Us
-          </h2>
-          <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mb-8"></div>
-        </div>        <!-- Main Description -->
-        <div class="space-y-6">
-          <p class="text-lg md:text-xl leading-relaxed text-base-content/90">
-            Leading <HoverSpan>software development</HoverSpan> and <HoverSpan>blockchain innovation</HoverSpan> 
-            with advanced AI expertise.
-          </p>
-        </div><!-- Key Values -->
-        <div class="grid md:grid-cols-2 gap-6 mt-12">
-          <div class="bg-base-100 rounded-xl p-6 border border-base-300 group">
-            <div class="text-2xl text-primary mb-3">
-              <i class="fa-solid fa-code"></i>
-            </div>
-            <h3 class="text-lg font-bold text-primary mb-2">Programming</h3>
-            <p class="text-base-content/70 text-sm">Advanced software development with cutting-edge technologies</p>
+        <MotionDiv client:load animation="slideRight" delay={0} duration={0.8}>
+          <div>
+            <h2 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
+              About Us
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mb-8"></div>
           </div>
+        </MotionDiv>
 
-          <div class="bg-base-100 rounded-xl p-6 border border-base-300 group">
-            <div class="text-2xl text-secondary mb-3">
-              <i class="fa-solid fa-globe"></i>
-            </div>
-            <h3 class="text-lg font-bold text-secondary mb-2">Website Design</h3>
-            <p class="text-base-content/70 text-sm">Modern, responsive websites with optimized user experience</p>
+        <!-- Main Description -->
+        <MotionDiv client:load animation="fade" delay={0.2} duration={0.8}>
+          <div class="space-y-6">
+            <p class="text-lg md:text-xl leading-relaxed text-base-content/90">
+              Leading <HoverSpan>software development</HoverSpan> and <HoverSpan>blockchain innovation</HoverSpan> 
+              with advanced AI expertise.
+            </p>
           </div>
+        </MotionDiv>
 
-          <div class="bg-base-100 rounded-xl p-6 border border-base-300 group">
-            <div class="text-2xl text-accent mb-3">
-              <i class="fa-solid fa-mobile-alt"></i>
+        <!-- Key Values -->
+        <MotionStagger client:load staggerDelay={0.1} className="grid md:grid-cols-2 gap-6 mt-12">
+          <MotionStaggerItem client:load animation="scale">
+            <div class="bg-base-100 rounded-xl p-6 border border-base-300 group hover:shadow-lg transition-all duration-300">
+              <div class="text-2xl text-primary mb-3">
+                <Icon name="code" size={32} />
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Programming</h3>
+              <p class="text-base-content/70 text-sm">Advanced software development with cutting-edge technologies</p>
             </div>
-            <h3 class="text-lg font-bold text-accent mb-2">Mobile Applications</h3>
-            <p class="text-base-content/70 text-sm">Native and cross-platform mobile solutions</p>
-          </div>
+          </MotionStaggerItem>
 
-          <div class="bg-base-100 rounded-xl p-6 border border-base-300 group">
-            <div class="text-2xl text-success mb-3">
-              <i class="fa-solid fa-lightbulb"></i>
+          <MotionStaggerItem client:load animation="scale">
+            <div class="bg-base-100 rounded-xl p-6 border border-base-300 group hover:shadow-lg transition-all duration-300">
+              <div class="text-2xl text-secondary mb-3">
+                <Icon name="globe" size={32} />
+              </div>
+              <h3 class="text-lg font-bold text-secondary mb-2">Website Design</h3>
+              <p class="text-base-content/70 text-sm">Modern, responsive websites with optimized user experience</p>
             </div>
-            <h3 class="text-lg font-bold text-success mb-2">Software Consulting</h3>
-            <p class="text-base-content/70 text-sm">Smart blockchain and AI solutions consulting</p>
+          </MotionStaggerItem>
+
+          <MotionStaggerItem client:load animation="scale">
+            <div class="bg-base-100 rounded-xl p-6 border border-base-300 group hover:shadow-lg transition-all duration-300">
+              <div class="text-2xl text-accent mb-3">
+                <Icon name="mobile" size={32} />
+              </div>
+              <h3 class="text-lg font-bold text-accent mb-2">Mobile Applications</h3>
+              <p class="text-base-content/70 text-sm">Native and cross-platform mobile solutions</p>
+            </div>
+          </MotionStaggerItem>
+
+          <MotionStaggerItem client:load animation="scale">
+            <div class="bg-base-100 rounded-xl p-6 border border-base-300 group hover:shadow-lg transition-all duration-300">
+              <div class="text-2xl text-success mb-3">
+                <Icon name="lightbulb" size={32} />
+              </div>
+              <h3 class="text-lg font-bold text-success mb-2">Software Consulting</h3>
+              <p class="text-base-content/70 text-sm">Smart blockchain and AI solutions consulting</p>
+            </div>
+          </MotionStaggerItem>
+        </MotionStagger>
+
+        <!-- CTA Button -->
+        <MotionDiv client:load animation="slideUp" delay={0.5} duration={0.8}>
+          <div class="mt-12">
+            <a 
+              href="/contact"
+              class="btn btn-primary btn-lg px-8 py-3 rounded-full hover:scale-105 transition-all duration-300"
+            >
+              Start Your Project
+            </a>
           </div>
-        </div>        <!-- CTA Button -->
-        <div class="mt-12">
-          <a 
-            href="/contact"
-            class="btn btn-primary btn-lg px-8 py-3 rounded-full hover:scale-105 transition-all duration-300"
-          >
-            Start Your Project
-          </a>
-        </div>
+        </MotionDiv>
       </div>
 
       <!-- Image Side -->
-      <div class="relative order-1 lg:order-2">
+      <MotionDiv client:load animation="slideLeft" delay={0.3} duration={0.8}>
+        <div class="relative order-1 lg:order-2">
         <!-- Main Image -->
         <div class="relative group">
           <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl transform rotate-6 group-hover:rotate-3 transition-transform duration-500"></div>
@@ -84,6 +108,7 @@ import { Image } from "astro:assets";
         <div class="absolute -bottom-8 -right-8 w-12 h-12 bg-secondary/20 rounded-full animate-bounce delay-1000"></div>
         <div class="absolute top-1/2 -right-12 w-8 h-8 bg-accent/20 rounded-full animate-bounce delay-500"></div>
       </div>
+      </MotionDiv>
     </div>
   </div>
 </section>

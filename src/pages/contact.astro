@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Icon from "@components/Icon.astro";
+import MotionDiv from "@components/MotionDiv.tsx";
 ---
 
 <BaseLayout title="Contact - Senior Blockchain Company">  <!-- Hero Section -->
@@ -152,16 +154,16 @@ import BaseLayout from "@layouts/BaseLayout.astro";
               class="btn btn-primary w-full font-semibold text-lg h-14 rounded-xl"
               id="submit-btn"
             >
-              <span id="submit-text">
-                <i class="fa-brands fa-whatsapp mr-2"></i>
+              <span id="submit-text" class="flex items-center justify-center gap-2">
+                <Icon name="message" size={20} />
                 Send Project Details via WhatsApp
               </span>
               <span id="submit-loading" class="loading loading-spinner loading-md hidden"></span>
             </button>
           </div>
 
-          <div class="text-center text-sm text-base-content/60 mt-4">
-            <i class="fa-solid fa-shield-halved mr-1"></i>
+          <div class="text-center text-sm text-base-content/60 mt-4 flex items-center justify-center gap-2">
+            <Icon name="shield" size={16} />
             Your information is secure and will only be used to contact you about your project
           </div>
         </form>
@@ -178,33 +180,33 @@ import BaseLayout from "@layouts/BaseLayout.astro";
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fa-solid fa-code text-2xl text-primary"></i>
+            <Icon name="code" size={32} class="text-primary" />
           </div>
           <h4 class="font-bold text-lg mb-3">Expert Development</h4>
           <p class="text-base-content/70 text-sm leading-relaxed">Professional coding with latest technologies and best practices</p>
         </div>
         
-        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fa-solid fa-coins text-2xl text-success"></i>
+            <Icon name="dollar" size={32} class="text-success" />
           </div>
           <h4 class="font-bold text-lg mb-3">Affordable Pricing</h4>
           <p class="text-base-content/70 text-sm leading-relaxed">Competitive rates starting from 100 OMR with transparent pricing</p>
         </div>
         
-        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <div class="w-16 h-16 bg-info/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fa-solid fa-clock text-2xl text-info"></i>
+            <Icon name="clock" size={32} class="text-info" />
           </div>
           <h4 class="font-bold text-lg mb-3">Fast Delivery</h4>
           <p class="text-base-content/70 text-sm leading-relaxed">Quick turnaround times without compromising on quality</p>
         </div>
 
-        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg">
+        <div class="text-center bg-base-100 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <div class="w-16 h-16 bg-warning/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fa-solid fa-headset text-2xl text-warning"></i>
+            <Icon name="headphones" size={32} class="text-warning" />
           </div>
           <h4 class="font-bold text-lg mb-3">24/7 Support</h4>
           <p class="text-base-content/70 text-sm leading-relaxed">Ongoing support and maintenance for your projects</p>
@@ -224,24 +226,24 @@ import BaseLayout from "@layouts/BaseLayout.astro";
       <div class="grid md:grid-cols-3 gap-8">
         <div class="text-center group">
           <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
-            <i class="fa-brands fa-whatsapp text-3xl text-primary"></i>
+            <Icon name="message" size={40} class="text-primary" />
           </div>
           <h4 class="font-bold text-xl mb-3">WhatsApp</h4>
           <p class="text-base-content/70 mb-4">Get instant responses</p>
-          <a href="https://wa.me/96891200634" target="_blank" class="btn btn-outline btn-primary btn-sm">
-            <i class="fa-brands fa-whatsapp mr-2"></i>
+          <a href="https://wa.me/96891200634" target="_blank" class="btn btn-outline btn-primary btn-sm flex items-center gap-2">
+            <Icon name="message" size={18} />
             +968 9120 0634
           </a>
         </div>
         
         <div class="text-center group">
           <div class="w-20 h-20 bg-info/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-info/20 transition-colors">
-            <i class="fa-solid fa-envelope text-3xl text-info"></i>
+            <Icon name="envelope" size={40} class="text-info" />
           </div>
           <h4 class="font-bold text-xl mb-3">Email</h4>
           <p class="text-base-content/70 mb-4">Professional inquiries</p>
-          <a href="mailto:post@sbc.om" class="btn btn-outline btn-info btn-sm">
-            <i class="fa-solid fa-envelope mr-2"></i>
+          <a href="mailto:post@sbc.om" class="btn btn-outline btn-info btn-sm flex items-center gap-2">
+            <Icon name="envelope" size={18} />
             post@sbc.om
           </a>
         </div>
@@ -249,12 +251,12 @@ import BaseLayout from "@layouts/BaseLayout.astro";
         
         <div class="text-center group">
           <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-pink-200 transition-colors">
-            <i class="fa-brands fa-instagram text-3xl text-pink-500"></i>
+            <Icon name="camera" size={40} class="text-pink-500" />
           </div>
           <h4 class="font-bold text-xl mb-3">Instagram</h4>
           <p class="text-base-content/70 mb-4">Follow us for updates</p>
-          <a href="https://instagram.com/seniorblockchain" target="_blank" class="btn btn-outline btn-pink-500 btn-sm">
-            <i class="fa-brands fa-instagram mr-2"></i>
+          <a href="https://instagram.com/seniorblockchain" target="_blank" class="btn btn-outline btn-sm flex items-center gap-2" style="border-color: rgb(236, 72, 153); color: rgb(236, 72, 153);">
+            <Icon name="camera" size={18} />
             @seniorblockchain
           </a>
         </div>

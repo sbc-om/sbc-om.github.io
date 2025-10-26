@@ -1,4 +1,6 @@
 ---
+import Icon from "../Icon.astro";
+
 interface Project {
   name: string;
   desc: string;
@@ -57,11 +59,11 @@ const projects: Project[] = [
 ];
 
 const categories = [
-  { id: 'all', name: 'All Projects', icon: 'fa-solid fa-grid' },
-  { id: 'blockchain', name: 'Blockchain', icon: 'fa-solid fa-link' },
-  { id: 'ai', name: 'AI Solutions', icon: 'fa-solid fa-brain' },
-  { id: 'defi', name: 'DeFi', icon: 'fa-solid fa-coins' },
-  { id: 'enterprise', name: 'Enterprise', icon: 'fa-solid fa-building' }
+  { id: 'all', name: 'All Projects', icon: 'grid' },
+  { id: 'blockchain', name: 'Blockchain', icon: 'link' },
+  { id: 'ai', name: 'AI Solutions', icon: 'brain' },
+  { id: 'defi', name: 'DeFi', icon: 'coins' },
+  { id: 'enterprise', name: 'Enterprise', icon: 'building' }
 ];
 ---
 
@@ -84,7 +86,7 @@ const categories = [
           class="portfolio-filter btn btn-outline hover:btn-primary transition-all duration-300 group"
           data-category={category.id}
         >
-          <i class={`${category.icon} mr-2 group-hover:scale-110 transition-transform duration-300`}></i>
+          <Icon name={category.icon} size={18} class="mr-2 group-hover:scale-110 transition-transform duration-300" />
           {category.name}
         </button>
       ))}

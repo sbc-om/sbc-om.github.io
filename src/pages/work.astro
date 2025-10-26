@@ -1,312 +1,146 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  technologies: string[];
-  status: string;
-  year: string;
-  image: string;
-  featured: boolean;
-}
-
-interface ProjectsData {
-  projects: Project[];
-}
-
-// Import projects data directly instead of fetching
-import { promises as fs } from 'fs';
-import path from 'path';
-
-// Read projects data from the filesystem during build time
-let projects: Project[] = [];
-try {
-  const filePath = path.resolve('./public/projects.json');
-  const fileContent = await fs.readFile(filePath, 'utf-8');
-  const data: ProjectsData = JSON.parse(fileContent);
-  projects = data.projects;
-} catch (error) {
-  console.error('Error loading projects data:', error);
-  projects = []; // Fallback to empty array if file can't be loaded
-}
-
-// Separate featured and regular projects
-const featuredProjects = projects.filter(p => p.featured);
-const regularProjects = projects.filter(p => !p.featured);
-
-// Get unique categories for filter
-const categories = ["All", ...new Set(projects.map(p => p.category))];
-
-// Calculate stats automatically from projects data
-const stats = {
-  total: projects.length,
-  completed: projects.filter(p => p.status === 'Completed').length,
-  inProgress: projects.filter(p => p.status === 'In Progress').length,
-  categories: [...new Set(projects.map(p => p.category))].length,
-  technologies: [...new Set(projects.flatMap(p => p.technologies))].length,
-  years: [...new Set(projects.map(p => p.year))].sort(),
-  latestYear: [...new Set(projects.map(p => p.year))].sort().pop() || ''
-};
+import Icon from "@components/Icon.astro";
+import MotionDiv from "@components/MotionDiv.tsx";
 ---
 
 <BaseLayout title="Our Portfolio - Senior Blockchain Company">
-  <!-- Hero Section with Stats -->
-  <section class="py-20 bg-gradient-to-br from-base-100 to-base-200">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-        Our Portfolio
-      </h1>
-      <p class="text-xl text-base-content/70 leading-relaxed max-w-3xl mx-auto mb-12">
-        Explore our professional software solutions that transform ideas into reality
-      </p>
-      
-      <!-- Project Stats - Automatically generated from projects data -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
-          <div class="text-3xl font-bold text-primary mb-1">{stats.total}</div>
-          <div class="text-sm text-base-content/60">Total Projects</div>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-br from-base-100 to-base-200 min-h-[80vh] flex items-center justify-center">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <MotionDiv client:load animation="slideDown" delay={0} duration={0.8}>
+        <div class="mb-8">
+          <Icon name="suitcase" size={80} class="mx-auto text-primary mb-6" />
         </div>
-        
-        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
-          <div class="flex justify-center items-center">
-            <div class="text-3xl font-bold text-success mb-1">{stats.completed}</div>
-            {stats.inProgress > 0 && (
-              <div class="text-sm text-warning font-medium ml-2">+{stats.inProgress} in progress</div>
-            )}
-          </div>
-          <div class="text-sm text-base-content/60">Completed Projects</div>
-        </div>
-        
-        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
-          <div class="text-3xl font-bold text-secondary mb-1">{stats.categories}</div>
-          <div class="text-sm text-base-content/60">Project Categories</div>
-        </div>
-        
-        <div class="bg-base-100 p-6 rounded-xl shadow-sm">
-          <div class="text-3xl font-bold text-accent mb-1">{stats.technologies}</div>
-          <div class="text-sm text-base-content/60">Technologies Used</div>
-        </div>
-      </div>
-      
-      {/* Additional stats showing date range for experience */}
-      {stats.years.length > 1 && (
-        <div class="mt-8 bg-base-100/50 inline-block py-2 px-6 rounded-full shadow-sm">
-          <span class="text-base-content/70">Experience since {stats.years[0]} to {stats.latestYear}</span>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- Featured Projects Showcase -->
-  {featuredProjects.length > 0 && (
-    <section class="py-20 bg-base-100">
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-          <h2 class="text-2xl md:text-3xl font-bold text-primary">Featured Projects</h2>
-          <p class="text-base-content/60 text-lg mt-2 md:mt-0">Our best work showcased</p>
-        </div>
-        
-        <div class="grid md:grid-cols-2 gap-10">
-          {featuredProjects.slice(0, 2).map((project) => (
-            <div class="group bg-base-100 rounded-2xl overflow-hidden shadow-lg border border-base-300/50 hover:shadow-xl transition-all duration-300">
-              <div class="aspect-video w-full bg-base-200 overflow-hidden">
-                {project.image ? (
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  />
-                ) : (
-                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
-                    <span class="text-primary/30 text-4xl font-bold">{project.title.charAt(0)}</span>
-                  </div>
-                )}
-              </div>
-              
-              <div class="p-8">
-                <div class="flex items-center justify-between mb-4">
-                  <span class="badge badge-primary">{project.category}</span>
-                  <div class="flex items-center">
-                    <span class={`badge ${project.status === 'Completed' ? 'badge-success' : 'badge-warning'}`}>
-                      {project.status}
-                    </span>
-                  </div>
-                </div>
-                
-                <h3 class="text-2xl font-bold text-base-content mb-4">
-                  {project.title}
-                </h3>
-                
-                <p class="text-base-content/70 leading-relaxed mb-6">
-                  {project.description}
-                </p>
-                
-                <div class="flex flex-wrap gap-2 mb-4">                  {project.technologies.map((tech: string) => (
-                    <span class="px-3 py-1 bg-base-200 rounded-full text-sm text-base-content/80">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                <div class="flex justify-between items-center mt-6">
-                  <span class="text-base-content/50">{project.year}</span>
-                  <button class="btn btn-sm btn-primary btn-outline">View Details</button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Project Gallery with Filters -->
-  <section class="py-20 bg-base-200/50">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Complete Portfolio</h2>
-        <p class="text-base-content/70 text-lg max-w-2xl mx-auto">
-          Browse our extensive collection of {stats.total} projects across {stats.categories} categories
+        <h1 class="text-4xl md:text-6xl font-bold text-primary mb-6">
+          Our Portfolio
+        </h1>
+        <p class="text-xl md:text-2xl text-base-content/70 leading-relaxed max-w-3xl mx-auto mb-8">
+          We're building amazing things for our clients
         </p>
-      </div>
+      </MotionDiv>
       
-      <!-- Category Filters - Dynamically generated from project categories -->
-      <div class="flex flex-wrap justify-center gap-3 mb-12" id="category-filters">
-        {categories.map((category) => (
-          <button 
-            class="px-4 py-2 rounded-full bg-base-100 hover:bg-primary hover:text-primary-content transition-colors duration-300 text-sm font-medium category-filter"
-            data-category={category}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-      
-      <!-- Projects Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-        {projects.map((project) => (
-          <div 
-            class="project-card bg-base-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-base-300/50"
-            data-category={project.category}
-          >
-            <!-- Project thumbnail -->
-            <div class="h-48 bg-base-200 overflow-hidden">
-              {project.image ? (
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
-                />
-              ) : (
-                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
-                  <span class="text-primary/30 text-3xl font-bold">{project.title.charAt(0)}</span>
-                </div>
-              )}
-            </div>
-            
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-3">
-                <span class="text-sm font-medium text-primary">
-                  {project.category}
-                </span>
-                <div class="flex items-center space-x-1">
-                  <span class={`w-2 h-2 rounded-full ${
-                    project.status === 'Completed' ? 'bg-success' : 
-                    project.status === 'In Progress' ? 'bg-warning' : 
-                    'bg-info'
-                  }`}></span>
-                  <span class="text-xs text-base-content/50">{project.status}</span>
-                </div>
-              </div>
-              
-              <h3 class="text-lg font-bold text-base-content mb-2">
-                {project.title}
-              </h3>
-              
-              <p class="text-base-content/70 text-sm leading-relaxed mb-4 line-clamp-3">
-                {project.description}
-              </p>
-              
-              <div class="flex flex-wrap gap-1 mb-4">                {project.technologies.slice(0, 3).map((tech: string) => (
-                  <span class="text-xs bg-base-200 text-base-content/70 px-2 py-1 rounded">
-                    {tech}
-                  </span>
-                ))}
-                {project.technologies.length > 3 && (
-                  <span class="text-xs bg-base-200 text-base-content/70 px-2 py-1 rounded">
-                    +{project.technologies.length - 3}
-                  </span>
-                )}
-              </div>
-              
-              <div class="flex justify-between items-center">
-                <span class="text-xs text-base-content/50">{project.year}</span>
-                <button class="btn btn-xs btn-ghost">Details</button>
-              </div>
-            </div>
+      <MotionDiv client:load animation="scale" delay={0.3} duration={0.8}>
+        <div class="bg-base-100 rounded-3xl p-12 shadow-2xl border-2 border-primary/20 max-w-2xl mx-auto">
+          <div class="flex justify-center mb-6">
+            <Icon name="rocket" size={64} class="text-primary animate-pulse" />
           </div>
-        ))}
-      </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+            Coming Soon!
+          </h2>
+          <p class="text-lg md:text-xl text-base-content/80 leading-relaxed mb-8">
+            We're currently working on exciting projects for our clients. 
+            Our portfolio will be updated soon with detailed case studies of our work.
+          </p>
+          <div class="bg-primary/10 border border-primary/30 rounded-2xl p-6 mb-8">
+            <h3 class="text-xl font-semibold text-primary mb-4 flex items-center justify-center gap-2">
+              <Icon name="lightbulb" size={24} />
+              What We're Building
+            </h3>
+            <ul class="space-y-3 text-base-content/70 text-left max-w-md mx-auto">
+              <li class="flex items-start gap-3">
+                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
+                <span>Advanced blockchain solutions</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
+                <span>AI-powered applications</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
+                <span>Modern web & mobile apps</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
+                <span>Enterprise software solutions</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="/#services" 
+              class="btn btn-primary btn-lg px-8 rounded-full hover:scale-105 transition-all duration-300 flex items-center gap-2"
+            >
+              <Icon name="eye" size={20} />
+              View Our Services
+            </a>
+            <a 
+              href="/contact" 
+              class="btn btn-outline btn-lg px-8 rounded-full hover:scale-105 transition-all duration-300 flex items-center gap-2"
+            >
+              <Icon name="envelope" size={20} />
+              Start Your Project
+            </a>
+          </div>
+        </div>
+      </MotionDiv>
+
+      <!-- Timeline Note -->
+      <MotionDiv client:load animation="fade" delay={0.6} duration={0.8}>
+        <div class="mt-12 bg-base-100/50 backdrop-blur-sm rounded-2xl p-6 border border-base-300/50">
+          <p class="text-base-content/60 flex items-center justify-center gap-2">
+            <Icon name="clock" size={20} />
+            <span>Portfolio showcase will be available in the coming weeks</span>
+          </p>
+        </div>
+      </MotionDiv>
     </div>
   </section>
 
-  <!-- Call To Action -->
-  <section class="py-16 bg-gradient-to-br from-primary/10 to-primary/5">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold text-base-content mb-4">Ready to Build Your Project?</h2>
-      <p class="text-base-content/70 text-lg mb-8 max-w-xl mx-auto">
-        Let our team of experts bring your vision to life with cutting-edge technology
-      </p>
-      <div class="flex justify-center">
-        <a 
-          href="/contact"
-          class="btn btn-primary btn-lg px-8"
-        >
-          Get a Quote
-        </a>
+  <!-- Why Choose Us Section -->
+  <section class="py-20 bg-base-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <MotionDiv client:load animation="slideUp" delay={0} duration={0.8}>
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+            Why Work With Us?
+          </h2>
+          <p class="text-lg text-base-content/70">
+            Professional development with cutting-edge technologies
+          </p>
+        </div>
+      </MotionDiv>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <MotionDiv client:load animation="slideUp" delay={0.2} duration={0.8}>
+          <div class="bg-base-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="code" size={32} class="text-primary" />
+            </div>
+            <h3 class="text-xl font-bold mb-4">Expert Development</h3>
+            <p class="text-base-content/70">
+              Professional coding with latest technologies and best practices
+            </p>
+          </div>
+        </MotionDiv>
+
+        <MotionDiv client:load animation="slideUp" delay={0.3} duration={0.8}>
+          <div class="bg-base-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="dollar" size={32} class="text-success" />
+            </div>
+            <h3 class="text-xl font-bold mb-4">Affordable Pricing</h3>
+            <p class="text-base-content/70">
+              Competitive rates starting from 100 OMR with transparent pricing
+            </p>
+          </div>
+        </MotionDiv>
+
+        <MotionDiv client:load animation="slideUp" delay={0.4} duration={0.8}>
+          <div class="bg-base-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-info/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="rocket" size={32} class="text-info" />
+            </div>
+            <h3 class="text-xl font-bold mb-4">Fast Delivery</h3>
+            <p class="text-base-content/70">
+              Quick turnaround times without compromising on quality
+            </p>
+          </div>
+        </MotionDiv>
       </div>
     </div>
   </section>
 </BaseLayout>
-
-<script>
-  // Category filtering functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterButtons = document.querySelectorAll('.category-filter');
-    const projectCards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
-    
-    // Set "All" as active by default
-    const allButton = document.querySelector('[data-category="All"]');
-    if (allButton) {
-      allButton.classList.add('bg-primary', 'text-primary-content');
-    }
-    
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-primary', 'text-primary-content');
-        });
-        
-        // Add active class to clicked button
-        button.classList.add('bg-primary', 'text-primary-content');
-        
-        const category = button.getAttribute('data-category');
-        
-        // Show/hide projects based on category
-        projectCards.forEach(card => {
-          if (category === 'All' || card.getAttribute('data-category') === category) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  });
-</script>
 
 
