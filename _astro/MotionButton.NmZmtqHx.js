@@ -1,0 +1,1 @@
+import{m as e,j as s}from"./proxy.Bn6cTRPe.js";import"./index.XRCnTTva.js";function t({children:t,className:i="",href:n,onClick:a,type:o="button"}){const r=n?e.a:e.button;return s.jsx(r,{className:i,href:n,onClick:a,type:n?void 0:o,whileHover:{scale:1.05},whileTap:{scale:.95},transition:{type:"spring",stiffness:400,damping:17},children:t})}export{t as default};

@@ -4,18 +4,18 @@
     <loc>https://sbc-om.github.io/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2025-10-27</lastmod>
   </url>
   <url>
     <loc>https://sbc-om.github.io/work</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2025-10-27</lastmod>
   </url>
   <url>
     <loc>https://sbc-om.github.io/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2025-10-27</lastmod>
   </url>
 </urlset>
