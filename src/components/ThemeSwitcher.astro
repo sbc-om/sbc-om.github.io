@@ -1,0 +1,203 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<!-- Theme Switcher Button -->
+<div class="theme-switcher">
+  <div class="dropdown dropdown-end" id="theme-dropdown">
+    <div tabindex="0" role="button" class="btn btn-circle btn-sm shadow-lg hover:shadow-xl transition-all duration-200" id="theme-button">
+      <Icon name="sun" size={18} class="theme-icon-light" />
+      <Icon name="moon" size={18} class="theme-icon-dark hidden" />
+    </div>
+    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 border border-base-300 rounded-box w-36 mt-2" id="theme-menu">
+      <li>
+        <button class="theme-option text-sm bg-base-100 hover:bg-base-200 text-base-content" data-theme="light">
+          <Icon name="sun" size={16} />
+          Light
+        </button>
+      </li>
+      <li>
+        <button class="theme-option text-sm bg-base-100 hover:bg-base-200 text-base-content" data-theme="dark">
+          <Icon name="moon" size={16} />
+          Dark
+        </button>
+      </li>
+      <li>
+        <button class="theme-option text-sm bg-base-100 hover:bg-base-200 text-base-content" data-theme="abyss">
+          <Icon name="star" size={16} />
+          Abyss
+        </button>
+      </li>
+      <li>
+        <button class="theme-option text-sm bg-base-100 hover:bg-base-200 text-base-content" data-theme="luxury">
+          <Icon name="diamond" size={16} />
+          Luxury
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  /* Force theme switcher to be visible and functional */
+  .theme-switcher {
+    position: fixed !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    z-index: 9999 !important;
+  }
+
+  /* Theme icon visibility based on current theme */
+  [data-theme="light"] .theme-icon-light {
+    display: inline-block !important;
+  }
+  
+  [data-theme="light"] .theme-icon-dark {
+    display: none !important;
+  }
+  
+  [data-theme="dark"] .theme-icon-light,
+  [data-theme="abyss"] .theme-icon-light,
+  [data-theme="luxury"] .theme-icon-light {
+    display: none !important;
+  }
+  
+  [data-theme="dark"] .theme-icon-dark,
+  [data-theme="abyss"] .theme-icon-dark,
+  [data-theme="luxury"] .theme-icon-dark {
+    display: inline-block !important;
+  }
+  
+  /* Dropdown styling with proper theme colors */
+  .dropdown-content {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(8px);
+    background-color: hsl(var(--b1)) !important;
+    border: 1px solid hsl(var(--bc) / 0.2) !important;
+    color: hsl(var(--bc)) !important;
+  }
+  
+  .dropdown:focus-within .dropdown-content,
+  .dropdown.dropdown-open .dropdown-content {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Theme option styling with proper colors */
+  .theme-option {
+    transition: all 0.2s ease-in-out !important;
+    background-color: hsl(var(--b1)) !important;
+    color: hsl(var(--bc)) !important;
+    border: none !important;
+  }
+
+  .theme-option:hover {
+    background-color: hsl(var(--b2)) !important;
+    color: hsl(var(--bc)) !important;
+  }
+
+  .theme-option:active,
+  .theme-option:focus {
+    background-color: hsl(var(--p)) !important;
+    color: hsl(var(--pc)) !important;
+  }
+
+  /* Menu items styling */
+  .menu li > * {
+    background-color: hsl(var(--b1)) !important;
+    color: hsl(var(--bc)) !important;
+  }
+
+  .menu li > *:hover {
+    background-color: hsl(var(--b2)) !important;
+    color: hsl(var(--bc)) !important;
+  }
+
+  /* Button styling */
+  #theme-button {
+    background-color: hsl(var(--b1)) !important;
+    color: hsl(var(--bc)) !important;
+    border: 1px solid hsl(var(--bc) / 0.2) !important;
+  }
+
+  #theme-button:hover {
+    background-color: hsl(var(--b2)) !important;
+  }
+</style>
+
+<script is:inline>
+  // Simple and reliable theme switcher
+  function setupThemeSwitcher() {
+    // Get current theme or default
+    const currentTheme = localStorage.getItem('sbc-theme') || 'abyss';
+    
+    // Apply theme immediately
+    function setTheme(themeName) {
+      console.log('Setting theme to:', themeName);
+      
+      // Apply to document
+      document.documentElement.setAttribute('data-theme', themeName);
+      document.body.setAttribute('data-theme', themeName);
+      
+      // Save to localStorage
+      localStorage.setItem('sbc-theme', themeName);
+      
+      console.log('Theme applied:', themeName);
+    }
+    
+    // Set initial theme
+    setTheme(currentTheme);
+    
+    // Setup click handlers for theme options
+    function attachHandlers() {
+      const themeButtons = document.querySelectorAll('.theme-option');
+      
+      themeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const newTheme = this.getAttribute('data-theme');
+          console.log('Theme button clicked:', newTheme);
+          
+          // Change theme
+          setTheme(newTheme);
+          
+          // Visual feedback
+          this.style.background = '#0098ea';
+          this.style.color = 'white';
+          
+          setTimeout(() => {
+            this.style.background = '';
+            this.style.color = '';
+          }, 200);
+          
+          // Close dropdown
+          const dropdown = document.querySelector('#theme-dropdown');
+          if (dropdown) {
+            dropdown.blur();
+          }
+        });
+      });
+      
+      console.log('Theme handlers attached to', themeButtons.length, 'buttons');
+    }
+    
+    // Attach handlers when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachHandlers);
+    } else {
+      attachHandlers();
+    }
+    
+    // Retry after a small delay
+    setTimeout(attachHandlers, 500);
+  }
+  
+  // Start theme switcher
+  setupThemeSwitcher();
+  
+  // Re-setup on page changes
+  document.addEventListener('astro:page-load', setupThemeSwitcher);
+</script>

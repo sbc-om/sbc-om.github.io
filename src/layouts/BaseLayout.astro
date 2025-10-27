@@ -3,6 +3,7 @@ import Footer from "@components/Footer.astro";
 import Nav from "@components/Nav.astro";
 import LoadingScreen from "@components/LoadingScreen.astro";
 import BackToTop from "@components/BackToTop.astro";
+import ThemeSwitcher from "@components/ThemeSwitcher.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -99,12 +100,23 @@ const { title } = Astro.props;
       }
     </style>  </head>  <body class="antialiased">
     <LoadingScreen />
+    <ThemeSwitcher />
     <Nav />
     <main class="overflow-x-hidden">
       <slot />
     </main>
     <Footer />
     <BackToTop />
+    
+    <!-- Theme initialization -->
+    <script is:inline>
+      // Initialize theme before page renders using existing sbc-theme key
+      (function() {
+        const savedTheme = localStorage.getItem('sbc-theme') || 'abyss';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.body.setAttribute('data-theme', savedTheme);
+      })();
+    </script>
     
     <!-- Smooth scroll polyfill for older browsers -->
     <script is:inline>
