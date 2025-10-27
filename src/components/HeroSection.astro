@@ -37,7 +37,7 @@ import MotionButton from "./MotionButton.tsx";
         <!-- Improved Dynamic Typing Effect -->
         <div class="h-20 md:h-24 lg:h-28 flex items-center justify-center">
           <h2 id="typing-text" class="text-3xl md:text-5xl lg:text-6xl font-black text-base-content tracking-tight leading-tight min-h-[1.2em]">
-            <span class="text-primary">Professional Software Solutions</span>
+            <span class="text-primary opacity-0" id="initial-text"></span>
           </h2>
         </div>
       </div>
@@ -54,14 +54,14 @@ import MotionButton from "./MotionButton.tsx";
     <!-- Enhanced CTA Buttons with More Space -->
     <MotionDiv client:load animation="slideUp" delay={0.6} duration={0.8}>
       <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mt-4">
-        <MotionButton client:load href="#about" className="btn btn-primary btn-lg text-white font-bold px-10 py-5 rounded-full shadow-lg hover:shadow-xl group">
+        <MotionButton client:load href="#about" className="btn btn-primary btn-lg text-white font-bold px-12 py-5 rounded-full shadow-lg hover:shadow-xl group w-full sm:w-64 min-w-fit">
           <span class="mr-2">About Us</span>
           <svg class="w-5 h-5 inline group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>
         </MotionButton>
         
-        <MotionButton client:load href="/work" className="btn btn-outline btn-lg font-bold px-10 py-5 rounded-full group">
+        <MotionButton client:load href="/work" className="btn btn-outline btn-lg font-bold px-12 py-5 rounded-full group w-full sm:w-64 min-w-fit">
           <span class="mr-2">View Projects</span>
           <svg class="w-5 h-5 inline group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
@@ -80,59 +80,86 @@ import MotionButton from "./MotionButton.tsx";
 </section>
 
 <script>
-  // Enhanced typing effect with better timing
+  // Enhanced typing effect with immediate start
   const texts = [
     "Premium Software Development",
-    "Professional Website Design",
-    "Innovative Mobile Applications", 
+    "Professional Website Design", 
+    "Innovative Mobile Applications",
     "Expert Software Consulting",
     "Advanced Blockchain & AI Solutions"
   ];
-    let textIndex = 0;
+  
+  let textIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
+  let typingStarted = false;
   const typingElement = document.getElementById('typing-text');
-    function typeText() {
-    const currentText = texts[textIndex];
-    
+  
+  function typeText() {
     if (!typingElement) return;
     
+    const currentText = texts[textIndex];
+    
+    // Show cursor immediately when typing starts
+    if (!typingStarted) {
+      typingStarted = true;
+      typingElement.innerHTML = `<span class="text-primary"></span><span class="animate-pulse text-primary">|</span>`;
+    }
+    
     if (isDeleting) {
-      // Enhanced cursor effect for deletion
-      typingElement.innerHTML = `<span class="text-primary">${currentText.substring(0, charIndex)}</span><span class="animate-pulse opacity-70">|</span>`;
+      // Deleting characters
+      const displayText = currentText.substring(0, charIndex);
+      typingElement.innerHTML = `<span class="text-primary">${displayText}</span><span class="animate-pulse text-primary">|</span>`;
       charIndex--;
     } else {
-      // Enhanced cursor effect for typing
-      typingElement.innerHTML = `<span class="text-primary">${currentText.substring(0, charIndex)}</span><span class="animate-pulse opacity-70">|</span>`;
+      // Typing characters
+      const displayText = currentText.substring(0, charIndex);
+      typingElement.innerHTML = `<span class="text-primary">${displayText}</span><span class="animate-pulse text-primary">|</span>`;
       charIndex++;
     }
     
-    // Improved timing logic
+    // Logic for when to switch between typing and deleting
     if (!isDeleting && charIndex === currentText.length) {
-      // Display complete text with cursor during pause
-      typingElement.innerHTML = `<span class="text-primary">${currentText}</span><span class="animate-pulse opacity-70">|</span>`;
+      // Finished typing - show complete text with cursor
+      typingElement.innerHTML = `<span class="text-primary">${currentText}</span><span class="animate-pulse text-primary">|</span>`;
       setTimeout(() => {
         isDeleting = true;
         typeText();
-      }, 2000); // Pause for 2 seconds to show complete text
+      }, 2500); // Pause to show complete text
       return;
     } else if (isDeleting && charIndex === 0) {
+      // Finished deleting - move to next text
       isDeleting = false;
       textIndex = (textIndex + 1) % texts.length;
     }
     
-    // Variable speed for more natural typing effect
-    let speed = isDeleting ? 50 : 100;
+    // Dynamic typing speed for natural feel
+    let speed = isDeleting ? 60 : 120;
     
-    // Randomize slightly for realistic effect
-    speed += Math.random() * 30 - 15;
+    // Add slight randomness for realistic typing
+    speed += Math.random() * 40 - 20;
+    
+    // Ensure minimum speed
+    speed = Math.max(speed, 30);
     
     setTimeout(typeText, speed);
   }
   
-  // Start typing effect after page load
+  // Start typing effect immediately when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Start typing immediately with no delay
+    setTimeout(() => {
+      if (typingElement) {
+        typeText();
+      }
+    }, 300); // Very short delay just to ensure DOM is fully ready
+  });
+  
+  // Fallback for window load
   window.addEventListener('load', () => {
-    setTimeout(typeText, 1000);
+    if (!typingStarted && typingElement) {
+      typeText();
+    }
   });
 </script>
 
@@ -197,6 +224,16 @@ import MotionButton from "./MotionButton.tsx";
   #typing-text {
     line-height: 1.3;
     letter-spacing: -0.02em;
+  }
+  
+  /* Enhanced cursor animation */
+  #typing-text span:last-child {
+    animation: cursor-blink 1s ease-in-out infinite;
+  }
+  
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
   
   .delay-300 { animation-delay: 0.3s; }
