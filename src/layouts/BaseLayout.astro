@@ -13,7 +13,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<html lang="en" data-theme="abyss">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -98,7 +98,21 @@ const { title } = Astro.props;
       .focus-visible {
         @apply outline-2 outline-primary outline-offset-2;
       }
-    </style>  </head>  <body class="antialiased">
+    </style>
+    
+    <!-- Theme initialization script - runs immediately -->
+    <script is:inline>
+      // Initialize theme before page renders to prevent flashing
+      (function() {
+        const availableThemes = ['light', 'dark', 'abyss'];
+        const savedTheme = localStorage.getItem('sbc-theme');
+        const validTheme = availableThemes.includes(savedTheme) ? savedTheme : 'light';
+        document.documentElement.setAttribute('data-theme', validTheme);
+      })();
+    </script>
+  </head>
+  
+  <body class="antialiased">
     <LoadingScreen />
     <ThemeSwitcher />
     <Nav />
@@ -107,16 +121,6 @@ const { title } = Astro.props;
     </main>
     <Footer />
     <BackToTop />
-    
-    <!-- Theme initialization -->
-    <script is:inline>
-      // Initialize theme before page renders using existing sbc-theme key
-      (function() {
-        const savedTheme = localStorage.getItem('sbc-theme') || 'abyss';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        document.body.setAttribute('data-theme', savedTheme);
-      })();
-    </script>
     
     <!-- Smooth scroll polyfill for older browsers -->
     <script is:inline>

@@ -1,53 +1,4 @@
 ---
-interface Testimonial {
-  name: string;
-  position: string;
-  company: string;
-  quote: string;
-  avatar?: string;
-  rating: number;
-}
-
-interface Achievement {
-  number: string;
-  label: string;
-  description: string;
-  icon: string;
-  color: string;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    name: "Sarah Johnson",
-    position: "CTO",
-    company: "TechCorp Solutions",
-    quote: "SBC transformed our entire financial infrastructure with their blockchain solution. The level of security and transparency we achieved exceeded our expectations.",
-    rating: 5
-  },
-  {
-    name: "Michael Chen",
-    position: "Founder & CEO",
-    company: "InnovateLab",
-    quote: "The AI-powered analytics platform developed by SBC increased our operational efficiency by 400%. Their team's expertise is truly world-class.",
-    rating: 5
-  },
-  {
-    name: "Emily Rodriguez",
-    position: "Head of Digital Transformation",
-    company: "Global Enterprise Inc",
-    quote: "Working with SBC was a game-changer for our digital transformation journey. Their blockchain voting system has revolutionized our corporate governance.",
-    rating: 5
-  },
-  {
-    name: "David Park",
-    position: "VP of Technology",
-    company: "FinanceNext",
-    quote: "SBC's DeFi platform enabled us to launch our lending services 6 months ahead of schedule. Their innovation and execution are unmatched.",
-    rating: 5
-  }
-];
-
----
 import Icon from "../Icon.astro";
 
 interface Achievement {
@@ -62,235 +13,51 @@ const achievements: Achievement[] = [
     value: "2019",
     label: "Established",
     icon: "calendar",
-    color: "text-blue-500",
+    color: "text-blue-500"
   },
-
   {
     value: "50+",
-    label: "Successful Projects",
+    label: "Projects",
     icon: "rocket",
-    color: "text-green-500",
+    color: "text-green-500"
   },
-
   {
     value: "40+",
-    label: "Satisfied Clients",
+    label: "Clients",
     icon: "handshake",
-    color: "text-orange-500",
+    color: "text-orange-500"
   },
-
-  {
-    value: "4.9/5",
-    label: "Client Satisfaction",
-    icon: "star",
-    color: "text-yellow-500",
-  },
-
   {
     value: "98%",
     label: "Success Rate",
     icon: "chart",
-    color: "text-purple-500",
-  },
-
-  {
-    value: "24/7",
-    label: "Support Available",
-    icon: "clock",
-    color: "text-cyan-500",
-  },
+    color: "text-purple-500"
+  }
 ];
 ---
----
 
-<section id="testimonials-achievements" class="py-20 bg-gradient-to-b from-base-100 via-base-200 to-base-100">
+<section class="py-20 bg-base-100">
   <div class="max-w-7xl mx-auto px-8">
-    
-    <!-- Achievements Section -->
-    <div class="mb-20">
-      <div class="text-center mb-16">
-        <h2 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
-          Our Impact
-        </h2>
-        <p class="text-xl md:text-2xl text-base-content/80 max-w-3xl mx-auto leading-relaxed">
-          Numbers that speak to our commitment to excellence and innovation
-        </p>
-      </div>
-
-      <!-- Achievements Grid -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-        {achievements.map((achievement, index) => (
-          <div 
-            class="achievement-card group text-center p-6 bg-base-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-base-300"
-            style={`animation-delay: ${index * 0.1}s`}
-          >
-            <div class={`text-4xl ${achievement.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
-              <Icon name={achievement.icon} size={40} />
-            </div>
-            <div class="text-3xl md:text-4xl font-black text-primary mb-2 group-hover:text-secondary transition-colors duration-300">
-              {achievement.number}
-            </div>
-            <div class="text-sm font-bold text-base-content mb-1">
-              {achievement.label}
-            </div>
-            <div class="text-xs text-base-content/60">
-              {achievement.description}
-            </div>
-          </div>
-        ))}
-      </div>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-base-content mb-6">
+        Our <span class="text-primary">Achievements</span>
+      </h2>
     </div>
-
-    <!-- Testimonials Section -->
-    <div>
-      <div class="text-center mb-16">
-        <h2 class="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
-          Client Stories
-        </h2>
-        <p class="text-xl md:text-2xl text-base-content/80 max-w-3xl mx-auto leading-relaxed">
-          Hear from our satisfied clients who have transformed their businesses with our solutions
-        </p>
-      </div>
-
-      <!-- Testimonials Grid -->
-      <div class="grid md:grid-cols-2 gap-8">
-        {testimonials.map((testimonial, index) => (
-          <div 
-            class="testimonial-card group bg-base-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-base-300 relative overflow-hidden"
-            style={`animation-delay: ${index * 0.2}s`}
-          >
-            <!-- Background Pattern -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-full transform translate-x-16 -translate-y-16 group-hover:scale-150 transition-transform duration-700"></div>
-            
-            <!-- Quote Icon -->
-            <div class="text-6xl text-primary/20 mb-4 group-hover:text-primary/30 transition-colors duration-300">
-              <i class="fa-solid fa-quote-left"></i>
-            </div>
-
-            <!-- Testimonial Content -->
-            <div class="relative z-10">
-              <!-- Rating Stars -->
-              <div class="flex mb-4">
-                {Array.from({ length: testimonial.rating }, (_, i) => (
-                  <i class="fa-solid fa-star text-yellow-500 text-lg mr-1"></i>
-                ))}
-              </div>
-
-              <!-- Quote -->
-              <p class="text-lg text-base-content/90 leading-relaxed mb-6 italic">
-                "{testimonial.quote}"
-              </p>
-
-              <!-- Client Info -->
-              <div class="flex items-center">
-                <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-lg mr-4 group-hover:scale-110 transition-transform duration-300">
-                  {testimonial.name.split(' ').map(n => n[0]).join('')}
-                </div>
-                <div>
-                  <div class="font-bold text-primary group-hover:text-secondary transition-colors duration-300">
-                    {testimonial.name}
-                  </div>
-                  <div class="text-sm text-base-content/70">
-                    {testimonial.position}, {testimonial.company}
-                  </div>
-                </div>
-              </div>
-            </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {achievements.map((achievement) => (
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/20 mb-4">
+            <Icon name={achievement.icon} size={32} class={achievement.color} />
           </div>
-        ))}
-      </div>
-
-      <!-- CTA Section -->
-      <div class="text-center mt-16 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl border border-primary/20">
-        <h3 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-          Join Our Success Stories
-        </h3>
-        <p class="text-lg text-base-content/80 mb-6 max-w-2xl mx-auto">
-          Ready to be our next success story? Let's discuss how we can transform your business
-        </p>
-        <a 
-          href="/contact"
-          class="btn btn-primary btn-lg px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 group"
-        >
-          <span class="mr-2">Start Your Journey</span>
-          <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
-        </a>
-      </div>
+          <div class="text-3xl font-bold text-base-content mb-2">
+            {achievement.value}
+          </div>
+          <div class="text-sm text-base-content/70">
+            {achievement.label}
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
-
-<script>
-  // Counter animation for achievements
-  function animateCounters() {
-    const achievements = document.querySelectorAll('.achievement-card');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const numberElement = entry.target.querySelector('.text-3xl') as HTMLElement;
-          if (!numberElement) return;
-          
-          const targetText = numberElement.textContent;
-          if (!targetText) return;
-          
-          const targetNumber = parseInt(targetText.replace(/\D/g, ''));
-          
-          if (targetNumber && !entry.target.classList.contains('animated')) {
-            entry.target.classList.add('animated');
-            animateNumber(numberElement, 0, targetNumber, targetText);
-          }
-        }
-      });
-    });
-    
-    achievements.forEach(achievement => observer.observe(achievement));
-  }
-
-  function animateNumber(element: HTMLElement, start: number, end: number, originalText: string) {
-    const duration = 2000;
-    const increment = end / (duration / 16);
-    let current = start;
-    
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= end) {
-        current = end;
-        clearInterval(timer);
-      }
-      
-      const suffix = originalText.replace(/\d/g, '').replace(/\+/g, '');
-      const prefix = originalText.match(/^\D*/)?.[0] || '';
-      element.textContent = prefix + Math.floor(current) + (originalText.includes('+') ? '+' : '') + suffix.replace(prefix, '');
-    }, 16);
-  }
-
-  // Initialize counter animation when page loads
-  document.addEventListener('DOMContentLoaded', animateCounters);
-</script>
-
-<style>
-  .achievement-card,
-  .testimonial-card {
-    animation: fadeInUp 0.8s ease-out both;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 60px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
-  .achievement-card:hover {
-    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
-  }
-
-  .testimonial-card:hover {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  }
-</style>

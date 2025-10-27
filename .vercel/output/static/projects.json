@@ -1,0 +1,70 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "DeFi Trading Platform",
+      "category": "Blockchain",
+      "description": "Advanced decentralized trading platform with smart contract integration and real-time analytics.",
+      "technologies": ["Solidity", "React", "Web3.js", "Node.js"],
+      "status": "Completed",
+      "year": "2024",
+      "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1024&auto=format&fit=crop",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "AI-Powered Analytics Dashboard",
+      "category": "Artificial Intelligence",
+      "description": "Machine learning dashboard for business intelligence with predictive analytics and data visualization.",
+      "technologies": ["Python", "TensorFlow", "React", "D3.js"],
+      "status": "Completed",
+      "year": "2024",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1024&auto=format&fit=crop",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "E-Commerce Mobile App",
+      "category": "Mobile Applications",
+      "description": "Cross-platform mobile application with modern UI/UX and seamless payment integration.",
+      "technologies": ["React Native", "Node.js", "MongoDB", "Stripe"],
+      "status": "Completed",
+      "year": "2023",
+      "image": "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?q=80&w=1024&auto=format&fit=crop",
+      "featured": false
+    },
+    {
+      "id": 4,
+      "title": "Corporate Website Redesign",
+      "category": "Website Design",
+      "description": "Modern corporate website with responsive design and optimized performance.",
+      "technologies": ["Astro", "TailwindCSS", "TypeScript", "Vercel"],
+      "status": "Completed",
+      "year": "2023",
+      "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1024&auto=format&fit=crop",
+      "featured": false
+    },
+    {
+      "id": 5,
+      "title": "Smart Contract Audit Tool",
+      "category": "Blockchain",
+      "description": "Automated smart contract security analysis tool with vulnerability detection.",
+      "technologies": ["Solidity", "Python", "Flask", "PostgreSQL"],
+      "status": "In Progress",
+      "year": "2024",
+      "image": "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "featured": true
+    },
+    {
+      "id": 6,
+      "title": "Enterprise Software Suite",
+      "category": "Software Consulting",
+      "description": "Custom enterprise software solution for workflow automation and team collaboration.",
+      "technologies": ["Next.js", "PostgreSQL", "Docker", "AWS"],
+      "status": "Completed",
+      "year": "2023",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "featured": false
+    }
+  ]
+}

@@ -28,12 +28,6 @@ import Icon from "./Icon.astro";
           Abyss
         </button>
       </li>
-      <li>
-        <button class="theme-option text-sm bg-base-100 hover:bg-base-200 text-base-content" data-theme="luxury">
-          <Icon name="diamond" size={16} />
-          Luxury
-        </button>
-      </li>
     </ul>
   </div>
 </div>
@@ -57,14 +51,12 @@ import Icon from "./Icon.astro";
   }
   
   [data-theme="dark"] .theme-icon-light,
-  [data-theme="abyss"] .theme-icon-light,
-  [data-theme="luxury"] .theme-icon-light {
+  [data-theme="abyss"] .theme-icon-light {
     display: none !important;
   }
   
   [data-theme="dark"] .theme-icon-dark,
-  [data-theme="abyss"] .theme-icon-dark,
-  [data-theme="luxury"] .theme-icon-dark {
+  [data-theme="abyss"] .theme-icon-dark {
     display: inline-block !important;
   }
   
@@ -128,27 +120,39 @@ import Icon from "./Icon.astro";
 </style>
 
 <script is:inline>
-  // Simple and reliable theme switcher
+  // Theme switcher with proper persistence
   function setupThemeSwitcher() {
-    // Get current theme or default
-    const currentTheme = localStorage.getItem('sbc-theme') || 'abyss';
+    // Available themes (luxury removed)
+    const availableThemes = ['light', 'dark', 'abyss'];
     
-    // Apply theme immediately
+    // Get saved theme from localStorage, validate it's available
+    const savedTheme = localStorage.getItem('sbc-theme');
+    const defaultTheme = 'light';
+    const currentTheme = availableThemes.includes(savedTheme) ? savedTheme : defaultTheme;
+    
+    // Apply theme immediately without console logs
     function setTheme(themeName) {
-      console.log('Setting theme to:', themeName);
+      // Validate theme exists in available themes
+      if (!availableThemes.includes(themeName)) {
+        themeName = 'light';
+      }
       
-      // Apply to document
+      // Apply to document elements
       document.documentElement.setAttribute('data-theme', themeName);
       document.body.setAttribute('data-theme', themeName);
       
-      // Save to localStorage
+      // Save to localStorage for persistence
       localStorage.setItem('sbc-theme', themeName);
-      
-      console.log('Theme applied:', themeName);
     }
     
-    // Set initial theme
-    setTheme(currentTheme);
+    // Clean up luxury theme if it was previously set
+    if (savedTheme === 'luxury') {
+      localStorage.removeItem('sbc-theme');
+      setTheme('light');
+    } else {
+      // Set initial theme on page load
+      setTheme(currentTheme);
+    }
     
     // Setup click handlers for theme options
     function attachHandlers() {
@@ -157,21 +161,21 @@ import Icon from "./Icon.astro";
       themeButtons.forEach(button => {
         button.addEventListener('click', function(e) {
           e.preventDefault();
+          e.stopPropagation();
           
           const newTheme = this.getAttribute('data-theme');
-          console.log('Theme button clicked:', newTheme);
           
-          // Change theme
+          // Change theme immediately
           setTheme(newTheme);
           
           // Visual feedback
-          this.style.background = '#0098ea';
-          this.style.color = 'white';
+          this.style.background = 'hsl(var(--p))';
+          this.style.color = 'hsl(var(--pc))';
           
           setTimeout(() => {
             this.style.background = '';
             this.style.color = '';
-          }, 200);
+          }, 300);
           
           // Close dropdown
           const dropdown = document.querySelector('#theme-dropdown');
@@ -180,8 +184,6 @@ import Icon from "./Icon.astro";
           }
         });
       });
-      
-      console.log('Theme handlers attached to', themeButtons.length, 'buttons');
     }
     
     // Attach handlers when DOM is ready

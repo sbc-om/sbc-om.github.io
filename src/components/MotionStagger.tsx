@@ -5,14 +5,12 @@ interface MotionStaggerProps {
   children: ReactNode;
   className?: string;
   staggerDelay?: number;
-  duration?: number;
 }
 
 export default function MotionStagger({
   children,
   className = "",
   staggerDelay = 0.1,
-  duration = 0.6,
 }: MotionStaggerProps) {
   return (
     <motion.div
