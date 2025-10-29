@@ -2,145 +2,186 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Icon from "@components/Icon.astro";
 import MotionDiv from "@components/MotionDiv.tsx";
+
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  progress: number;
+  status: string;
+  technologies: string[];
+  features: string[];
+}
+
+const projects: Project[] = [
+  {
+    id: "ai-smartstore",
+    name: "AI SmartStore",
+    description: "An intelligent e-commerce platform powered by AI that provides personalized shopping experiences, smart recommendations, and automated inventory management.",
+    icon: "shopping-cart",
+    progress: 80,
+    status: "In Development",
+    technologies: ["AI/ML", "Next.js", "TypeScript", "LMDB", "TensorFlow"],
+    features: [
+      "AI-powered product recommendations",
+      "Smart inventory management",
+      "Personalized shopping experience",
+      "Real-time analytics dashboard"
+    ]
+  },
+  {
+    id: "ai-smarterp",
+    name: "AI SmartERP",
+    description: "A comprehensive Enterprise Resource Planning system enhanced with artificial intelligence for predictive analytics, automated workflows, and intelligent decision-making.",
+    icon: "briefcase",
+    progress: 50,
+    status: "In Development",
+    technologies: ["AI/ML", "Next.js", "TypeScript", "LMDB", "Docker"],
+    features: [
+      "Predictive business analytics",
+      "Automated workflow management",
+      "AI-driven insights",
+      "Multi-department integration"
+    ]
+  }
+];
 ---
 
 <BaseLayout title="Our Portfolio - Senior Blockchain Company">
   <!-- Hero Section -->
-  <section class="py-20 bg-gradient-to-br from-base-100 to-base-200 min-h-[80vh] flex items-center justify-center">
-    <div class="max-w-4xl mx-auto px-6 text-center">
+  <section class="py-20 bg-gradient-to-br from-base-100 via-base-200 to-base-100">
+    <div class="max-w-7xl mx-auto px-6">
       <MotionDiv client:load animation="slideDown" delay={0} duration={0.8}>
-        <div class="mb-8">
-          <Icon name="suitcase" size={80} class="mx-auto text-primary mb-6" />
-        </div>
-        <h1 class="text-4xl md:text-6xl font-bold text-primary mb-6">
-          Our Portfolio
-        </h1>
-        <p class="text-xl md:text-2xl text-base-content/70 leading-relaxed max-w-3xl mx-auto mb-8">
-          We're building amazing things for our clients
-        </p>
-      </MotionDiv>
-      
-      <MotionDiv client:load animation="scale" delay={0.3} duration={0.8}>
-        <div class="bg-base-100 rounded-3xl p-12 shadow-2xl border-2 border-primary/20 max-w-2xl mx-auto">
-          <div class="flex justify-center mb-6">
-            <Icon name="rocket" size={64} class="text-primary animate-pulse" />
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 mb-6">
+            <Icon name="briefcase" size={48} class="text-primary" />
           </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-            Coming Soon!
-          </h2>
-          <p class="text-lg md:text-xl text-base-content/80 leading-relaxed mb-8">
-            We're currently working on exciting projects for our clients. 
-            Our portfolio will be updated soon with detailed case studies of our work.
+          <h1 class="text-5xl md:text-6xl font-bold text-base-content mb-6">
+            Our <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Projects</span>
+          </h1>
+          <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+            Innovative AI-powered solutions currently in development
           </p>
-          <div class="bg-primary/10 border border-primary/30 rounded-2xl p-6 mb-8">
-            <h3 class="text-xl font-semibold text-primary mb-4 flex items-center justify-center gap-2">
-              <Icon name="lightbulb" size={24} />
-              What We're Building
-            </h3>
-            <ul class="space-y-3 text-base-content/70 text-left max-w-md mx-auto">
-              <li class="flex items-start gap-3">
-                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
-                <span>Advanced blockchain solutions</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
-                <span>AI-powered applications</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
-                <span>Modern web & mobile apps</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <Icon name="check" size={20} class="text-primary mt-1 flex-shrink-0" />
-                <span>Enterprise software solutions</span>
-              </li>
-            </ul>
+        </div>
+      </MotionDiv>
+
+      <!-- Projects Grid -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {projects.map((project, index) => (
+          <MotionDiv client:load animation="slideUp" delay={index * 0.2} duration={0.8}>
+            <div class="group bg-base-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-base-300 hover:border-primary/50 h-full flex flex-col">
+              
+              <!-- Project Icon -->
+              <div class="relative mb-6">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div class="relative inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/30 group-hover:scale-110 transition-all duration-500">
+                  <Icon name={project.icon} size={56} class="text-primary" />
+                </div>
+              </div>
+
+              <!-- Project Header -->
+              <div class="mb-4">
+                <div class="flex items-center justify-between mb-3">
+                  <h2 class="text-3xl font-bold text-base-content group-hover:text-primary transition-colors duration-300">
+                    {project.name}
+                  </h2>
+                  <span class="badge badge-primary badge-lg">{project.status}</span>
+                </div>
+                <p class="text-base-content/70 leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-sm font-semibold text-base-content/70">Progress</span>
+                  <span class="text-2xl font-bold text-primary">{project.progress}%</span>
+                </div>
+                <div class="w-full bg-base-300 rounded-full h-4 overflow-hidden">
+                  <div 
+                    class="bg-gradient-to-r from-primary to-secondary h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end pr-2"
+                    style={`width: ${project.progress}%`}
+                  >
+                    <span class="text-xs font-bold text-white">{project.progress}%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Technologies -->
+              <div class="mb-6">
+                <h3 class="text-sm font-semibold text-base-content/70 mb-3 flex items-center gap-2">
+                  <Icon name="code" size={16} />
+                  Technologies
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Features -->
+              <div class="flex-grow">
+                <h3 class="text-sm font-semibold text-base-content/70 mb-3 flex items-center gap-2">
+                  <Icon name="star" size={16} />
+                  Key Features
+                </h3>
+                <ul class="space-y-2">
+                  {project.features.map((feature) => (
+                    <li class="flex items-start gap-2 text-sm text-base-content/70">
+                      <Icon name="check" size={16} class="text-primary mt-0.5 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Last Updated -->
+              <div class="mt-6 pt-6 border-t border-base-300">
+                <p class="text-xs text-base-content/50 flex items-center gap-2">
+                  <Icon name="clock" size={14} />
+                  Last updated: Today
+                </p>
+              </div>
+            </div>
+          </MotionDiv>
+        ))}
+      </div>
+
+      <!-- Info Banner -->
+      <MotionDiv client:load animation="fade" delay={0.6} duration={0.8}>
+        <div class="mt-16 bg-gradient-to-r from-primary/10 to-secondary/10 border-2 border-primary/20 rounded-3xl p-8 text-center max-w-4xl mx-auto">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/20 mb-4">
+            <Icon name="lightbulb" size={32} class="text-primary" />
           </div>
-          
+          <h3 class="text-2xl font-bold text-base-content mb-4">
+            Have a Project in Mind?
+          </h3>
+          <p class="text-base-content/70 mb-6 max-w-2xl mx-auto">
+            We're always looking for exciting new projects. Let's discuss how we can help bring your ideas to life with our cutting-edge AI and blockchain solutions.
+          </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="/#services" 
-              class="btn btn-primary btn-lg px-8 rounded-full hover:scale-105 transition-all duration-300 flex items-center gap-2"
-            >
-              <Icon name="eye" size={20} />
-              View Our Services
-            </a>
-            <a 
               href="/contact" 
-              class="btn btn-outline btn-lg px-8 rounded-full hover:scale-105 transition-all duration-300 flex items-center gap-2"
+              class="btn btn-primary btn-lg px-8 rounded-full hover:scale-105 transition-all duration-300"
             >
               <Icon name="envelope" size={20} />
-              Start Your Project
+              Start a Project
+            </a>
+            <a 
+              href="/#services" 
+              class="btn btn-outline btn-lg px-8 rounded-full hover:scale-105 transition-all duration-300"
+            >
+              <Icon name="eye" size={20} />
+              View Services
             </a>
           </div>
         </div>
       </MotionDiv>
-
-      <!-- Timeline Note -->
-      <MotionDiv client:load animation="fade" delay={0.6} duration={0.8}>
-        <div class="mt-12 bg-base-100/50 backdrop-blur-sm rounded-2xl p-6 border border-base-300/50">
-          <p class="text-base-content/60 flex items-center justify-center gap-2">
-            <Icon name="clock" size={20} />
-            <span>Portfolio showcase will be available in the coming weeks</span>
-          </p>
-        </div>
-      </MotionDiv>
-    </div>
-  </section>
-
-  <!-- Why Choose Us Section -->
-  <section class="py-20 bg-base-100">
-    <div class="max-w-6xl mx-auto px-6">
-      <MotionDiv client:load animation="slideUp" delay={0} duration={0.8}>
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Why Work With Us?
-          </h2>
-          <p class="text-lg text-base-content/70">
-            Professional development with cutting-edge technologies
-          </p>
-        </div>
-      </MotionDiv>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <MotionDiv client:load animation="slideUp" delay={0.2} duration={0.8}>
-          <div class="bg-base-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Icon name="code" size={32} class="text-primary" />
-            </div>
-            <h3 class="text-xl font-bold mb-4">Expert Development</h3>
-            <p class="text-base-content/70">
-              Professional coding with latest technologies and best practices
-            </p>
-          </div>
-        </MotionDiv>
-
-        <MotionDiv client:load animation="slideUp" delay={0.3} duration={0.8}>
-          <div class="bg-base-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Icon name="dollar" size={32} class="text-success" />
-            </div>
-            <h3 class="text-xl font-bold mb-4">Affordable Pricing</h3>
-            <p class="text-base-content/70">
-              Competitive rates starting from 100 OMR with transparent pricing
-            </p>
-          </div>
-        </MotionDiv>
-
-        <MotionDiv client:load animation="slideUp" delay={0.4} duration={0.8}>
-          <div class="bg-base-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-info/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Icon name="rocket" size={32} class="text-info" />
-            </div>
-            <h3 class="text-xl font-bold mb-4">Fast Delivery</h3>
-            <p class="text-base-content/70">
-              Quick turnaround times without compromising on quality
-            </p>
-          </div>
-        </MotionDiv>
-      </div>
     </div>
   </section>
 </BaseLayout>
-
-
