@@ -127,14 +127,14 @@ import Icon from "./Icon.astro";
     
     // Get saved theme from localStorage, validate it's available
     const savedTheme = localStorage.getItem('sbc-theme');
-    const defaultTheme = 'light';
+    const defaultTheme = 'abyss';
     const currentTheme = availableThemes.includes(savedTheme) ? savedTheme : defaultTheme;
     
     // Apply theme immediately without console logs
     function setTheme(themeName) {
       // Validate theme exists in available themes
       if (!availableThemes.includes(themeName)) {
-        themeName = 'light';
+        themeName = 'abyss';
       }
       
       // Apply to document elements

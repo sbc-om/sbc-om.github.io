@@ -4,22 +4,6 @@ import MotionButton from "./MotionButton.tsx";
 ---
 
 <section class="relative w-screen h-screen flex justify-center items-center overflow-hidden bg-gradient-to-br from-base-100 via-base-200 to-base-300">
-  <!-- Enhanced Background Elements -->
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,theme(colors.primary)_0%,transparent_60%)] animate-pulse" style="animation-duration: 8s;"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_75%,theme(colors.secondary)_0%,transparent_60%)] animate-pulse" style="animation-duration: 10s;"></div>
-  </div>
-  
-  <!-- Professional Grid Overlay -->
-  <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
-  
-  <!-- Refined Floating Elements -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-[15%] left-[20%] w-2 h-2 bg-primary rounded-full animate-float-slow"></div>
-    <div class="absolute top-[30%] right-[25%] w-3 h-3 bg-secondary rounded-full animate-float-medium"></div>
-    <div class="absolute bottom-[35%] left-[30%] w-1 h-1 bg-accent rounded-full animate-float-fast"></div>
-    <div class="absolute bottom-[20%] right-[15%] w-2 h-2 bg-primary rounded-full animate-float-medium"></div>
-  </div>
     <!-- Main Content with Improved Spacing -->
   <div class="relative z-10 flex flex-col gap-8 text-center px-6 max-w-6xl mx-auto -mt-12">
     <!-- Company Name with Elegant Styling -->
@@ -71,10 +55,10 @@ import MotionButton from "./MotionButton.tsx";
     </MotionDiv>
   </div>
 
-  <!-- Enhanced Scroll Indicator -->
-  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
     <div class="w-6 h-12 border-2 border-primary rounded-full flex justify-center">
-      <div class="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+      <div class="w-1 h-3 bg-primary rounded-full mt-2"></div>
     </div>
   </div>
 </section>
@@ -178,46 +162,6 @@ import MotionButton from "./MotionButton.tsx";
 
   .animate-fade-in-up {
     animation: fadeInUp 1.2s ease-out both;
-  }
-  
-  /* Custom floating animations for elements */
-  @keyframes float-slow {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, -15px); }
-  }
-  
-  @keyframes float-medium {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-10px, 10px); }
-  }
-  
-  @keyframes float-fast {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(8px, -8px); }
-  }
-  
-  .animate-float-slow {
-    animation: float-slow 8s ease-in-out infinite;
-  }
-  
-  .animate-float-medium {
-    animation: float-medium 6s ease-in-out infinite;
-  }
-  
-  .animate-float-fast {
-    animation: float-fast 4s ease-in-out infinite;
-  }
-  
-  .animate-bounce-slow {
-    animation: bounce 2s infinite;
-  }
-  
-  /* Professional grid background pattern */
-  .bg-grid-pattern {
-    background-image: 
-      linear-gradient(to right, rgba(var(--b-rgb), 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(var(--b-rgb), 0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
   }
   
   /* Improved line spacing for text */
