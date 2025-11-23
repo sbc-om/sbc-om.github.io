@@ -6,6 +6,86 @@ let lastScrollTop = 0;
 let ticking = false;
 
 // ============================
+// Hero Video Background Optimization
+// ============================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const heroVideo = document.querySelector('.hero-video');
+    
+    if (heroVideo) {
+        // Optimize video playback
+        heroVideo.playbackRate = 1.0;
+        
+        // Ensure video plays (some browsers may block autoplay)
+        const playPromise = heroVideo.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // Video is playing
+                console.log('Hero video background is playing');
+            }).catch(error => {
+                // Auto-play was prevented, try to play on user interaction
+                console.log('Auto-play prevented, waiting for user interaction');
+                
+                document.body.addEventListener('click', () => {
+                    heroVideo.play();
+                }, { once: true });
+                
+                document.body.addEventListener('touchstart', () => {
+                    heroVideo.play();
+                }, { once: true });
+            });
+        }
+        
+        // Pause video when not in viewport to save resources
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    heroVideo.play();
+                } else {
+                    heroVideo.pause();
+                }
+            });
+        }, observerOptions);
+        
+        videoObserver.observe(heroVideo);
+        
+        // Adjust video quality based on connection
+        if ('connection' in navigator) {
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (connection && connection.effectiveType) {
+                // If slow connection, you could potentially switch to a lower quality video
+                if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                    console.log('Slow connection detected');
+                    // Optional: Load a lower quality version or fallback image
+                }
+            }
+        }
+        
+        // Preload video metadata
+        heroVideo.addEventListener('loadedmetadata', () => {
+            console.log('Video metadata loaded');
+        });
+        
+        // Handle video errors gracefully
+        heroVideo.addEventListener('error', (e) => {
+            console.error('Video loading error:', e);
+            // You could hide the video container and show a fallback background
+            const videoContainer = document.querySelector('.hero-video-container');
+            if (videoContainer) {
+                videoContainer.style.opacity = '0';
+            }
+        });
+    }
+});
+
+// ============================
 // Smooth Scroll Handler
 // ============================
 

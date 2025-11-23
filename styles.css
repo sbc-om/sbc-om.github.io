@@ -338,16 +338,77 @@ body.light-theme .theme-toggle {
     text-align: center;
     position: relative;
     background: var(--color-bg-primary);
+    overflow: hidden;
 }
 
 body.light-theme .hero {
     background: var(--color-bg-primary);
 }
 
+/* Video Background Styles */
+.hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 0;
+    will-change: transform;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* High quality video rendering - optimized for maximum clarity */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+/* Video Overlay - Minimal for Maximum Video Quality */
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 26, 0.35) 0%,
+        rgba(26, 26, 26, 0.25) 50%,
+        rgba(0, 168, 255, 0.05) 100%
+    );
+    z-index: 1;
+}
+
+body.light-theme .hero-video-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.45) 0%,
+        rgba(255, 255, 255, 0.35) 50%,
+        rgba(0, 168, 255, 0.05) 100%
+    );
+}
+
 .hero-content {
     max-width: 800px;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .hero-logo {
@@ -355,20 +416,25 @@ body.light-theme .hero {
     display: flex;
     justify-content: center;
     position: relative;
-    z-index: 1;
+    z-index: 3;
 }
 
 .logo-svg {
     width: 150px;
     height: 150px;
-    filter: drop-shadow(0 10px 30px rgba(0, 168, 255, 0.3));
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4)) 
+            drop-shadow(0 8px 24px rgba(0, 168, 255, 0.3)) 
+            drop-shadow(0 0 40px rgba(0, 168, 255, 0.2));
     transition: var(--transition-normal);
     animation: logoFloat 3s ease-in-out infinite;
+    position: relative;
 }
 
 .logo-svg:hover {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 15px 40px rgba(0, 168, 255, 0.5));
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5)) 
+            drop-shadow(0 12px 32px rgba(0, 168, 255, 0.4)) 
+            drop-shadow(0 0 60px rgba(0, 168, 255, 0.3));
 }
 
 @keyframes logoFloat {
@@ -384,7 +450,12 @@ body.light-theme .hero {
     font-size: var(--font-size-lg);
     color: var(--color-accent-primary);
     margin-bottom: var(--spacing-sm);
-    font-weight: 500;
+    font-weight: 600;
+    position: relative;
+    z-index: 3;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 
+                 0 4px 16px rgba(0, 0, 0, 0.3),
+                 0 0 24px rgba(0, 168, 255, 0.4);
 }
 
 .hero-title {
@@ -875,12 +946,33 @@ body.light-theme .hero {
         height: 100px;
     }
     
+    /* Mobile optimization for video background */
+    .hero-video {
+        object-position: center center;
+    }
+    
+    .hero-video-overlay {
+        background: linear-gradient(
+            135deg,
+            rgba(26, 26, 26, 0.4) 0%,
+            rgba(26, 26, 26, 0.3) 50%,
+            rgba(0, 168, 255, 0.05) 100%
+        );
+    }
+    
+    body.light-theme .hero-video-overlay {
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(0, 168, 255, 0.05) 100%
+        );
+    }
+
     .about-logo-svg {
         width: 300px;
         height: 300px;
-    }
-    
-    .features-grid {
+    }    .features-grid {
         grid-template-columns: 1fr;
     }
     
@@ -893,6 +985,25 @@ body.light-theme .hero {
     .hero-logo .logo-svg {
         width: 80px;
         height: 80px;
+    }
+    
+    /* Extra mobile optimization for video */
+    .hero-video-overlay {
+        background: linear-gradient(
+            135deg,
+            rgba(26, 26, 26, 0.45) 0%,
+            rgba(26, 26, 26, 0.35) 50%,
+            rgba(0, 168, 255, 0.05) 100%
+        );
+    }
+    
+    body.light-theme .hero-video-overlay {
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.55) 0%,
+            rgba(255, 255, 255, 0.45) 50%,
+            rgba(0, 168, 255, 0.05) 100%
+        );
     }
     
     .about-logo-svg {
